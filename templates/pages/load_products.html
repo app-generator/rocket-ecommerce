@@ -7,14 +7,19 @@
             <div class="place-self-center mr-auto lg:col-span-5">
                 <h1
                     class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-                    Load product
+                    Products
                 </h1>
                 <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    Load stripe product and save it to local DB.
+                    Download products from Stripe and save the content.
                 </p>
                 <a href="{% url "load_stripe_products" %}"
+
+                    {% if not request.user.is_authenticated %}
+                        onclick="this.textContent = 'Please Authenticate'; return false;"
+                    {% endif %}
+
                     class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                    Load Product
+                    Get Stripe Products
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -22,10 +27,8 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </a>
-                {% comment %} <a href="https://appseed.us/support/" target="_blank"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    Support
-                </a> {% endcomment %}
+
+                {% if not request.user.is_authenticated %} (requires authentication) {% endif %}
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex gap-16">
                 <div>

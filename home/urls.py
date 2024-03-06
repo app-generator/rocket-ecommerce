@@ -3,8 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.starter, name="index"),
-    path("starter/", views.starter, name="starter"),
+    path("", views.index, name="index"),
+    path("load_products/", views.load_products, name="load_products"),
 
     path('load-stripe-products/', views.load_stripe_products, name="load_stripe_products"),
     path('create-related-product/<int:stripe_product_id>/', views.create_related_product, name="create_related_product"),

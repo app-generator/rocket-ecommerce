@@ -32,12 +32,12 @@ def load_stripe_products(request):
   return redirect(request.META.get('HTTP_REFERER'))
 
 
-def starter(request):
+def load_products(request):
   context = {
     'stripe_products': ProductStripe.objects.all(),
     'products': Product.objects.all()
   }
-  return render(request, "pages/starter.html", context)
+  return render(request, "pages/load_products.html", context)
 
 
 def create_related_product(request, stripe_product_id):
