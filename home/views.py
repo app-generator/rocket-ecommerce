@@ -60,7 +60,7 @@ def edit_product(request, product_id):
     form = ProductForm(request.POST, request.FILES, instance=product)
     if form.is_valid():
       form.save()
-      return redirect(reverse('starter'))
+      return redirect(reverse('load_products'))
   
   context = {
     'form': form
