@@ -1,8 +1,10 @@
 import stripe
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from apps.common.models import ProductStripe, Product
+from apps.common.models import ProductStripe, Product, Cart
 from home.forms import ProductForm
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
@@ -32,7 +34,8 @@ def load_stripe_products(request):
 
 def starter(request):
   context = {
-    'stripe_products': ProductStripe.objects.all()
+    'stripe_products': ProductStripe.objects.all(),
+    'products': Product.objects.all()
   }
   return render(request, "pages/starter.html", context)
 
@@ -57,8 +60,52 @@ def edit_product(request, product_id):
     form = ProductForm(request.POST, request.FILES, instance=product)
     if form.is_valid():
       form.save()
+      return redirect(reverse('starter'))
   
   context = {
     'form': form
   }
   return render(request, 'pages/edit-product.html', context)
+
+
+
+def product_details(request, product_id):
+  product = get_object_or_404(Product, pk=product_id)
+
+  context = {
+    'product': product
+  }
+  return render(request, 'pages/product-details.html', context)
+
+
+@login_required(login_url='/users/signin/')
+def add_to_cart(request, product_id):
+  product = get_object_or_404(Product, pk=product_id)
+  
+  cart, created = Cart.objects.get_or_create(
+    product=product,
+    user=request.user
+  )
+
+  if not created:
+    cart.quantity += 1
+    cart.save()
+  
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='/users/signin/')
+def cart_list(request):
+  carts = Cart.objects.filter(user=request.user)
+
+  context = {
+    'carts': carts
+  }
+  return render(request, 'pages/cart-list.html', context)
+
+
+@login_required(login_url='/users/signin/')
+def delete_cart(request, cart_id):
+  cart = get_object_or_404(Cart, pk=cart_id)
+  cart.delete()
+  return redirect(request.META.get('HTTP_REFERER'))

@@ -3610,10 +3610,6 @@ input:checked + .toggle-bg {
     grid-column: span 5 / span 5;
   }
 
-  .lg\:col-span-7 {
-    grid-column: span 7 / span 7;
-  }
-
   .lg\:mb-0 {
     margin-bottom: 0px;
   }
