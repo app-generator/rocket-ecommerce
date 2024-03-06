@@ -85,6 +85,35 @@
             </div>
         </div>
     </section>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="grid py-8 px-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 grid-cols-2 max-w-3xl ">
+
+            
+                    <div>
+                        <h3 class="text-3xl font-bold dark:text-white mb-3">Stripe Product</h3>
+                        {% for product in stripe_products %}
+                            <h4 class="block mb-3">{{ product.name }}</h4>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold dark:text-white mb-3">Local Product</h3>
+                        {% for product in stripe_products %}
+                            {% if product.product %}
+                               <div class="flex gap-3 mb-3">
+                                    <p class="text-green-500">{{ product.product.name }}</p>
+                                    <a class="text-blue-600" href="{% url "edit_product" product.product.id %}">Edit</a>
+                               </div>
+                            {% else %}
+                                <a class="block mb-3 text-blue-600" href="{% url "create_related_product" product.id %}">Create Related Product</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                
+        </div>
+
+    </section>  
+
 
     <script src="{% static 'dist/main.bundle.js' %}"></script>
 </body>
