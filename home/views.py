@@ -1,7 +1,10 @@
 import stripe
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from apps.common.models import Product, ProductImage
+from apps.common.models import ProductStripe, Product, Cart
+from home.forms import ProductForm
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
@@ -18,23 +21,91 @@ def index(request):
 def load_stripe_products(request):
   stripe_products = stripe.Product.list(expand=['data.default_price'])
   for stripe_product in stripe_products:
-    product = Product.objects.create(
-      title=stripe_product['name'],
-      short_description=stripe_product["description"][:100] if stripe_product["description"] else '',
-      full_description=stripe_product["description"],
-      price=stripe_product["default_price"]["unit_amount"]/100,
+    product = ProductStripe.objects.update_or_create(
+      name=stripe_product['name'],
+      defaults={
+        'description': stripe_product["description"],
+        'price': stripe_product["default_price"]["unit_amount"]/100,
+      }
     )
-
-    for image in stripe_product['images']:
-      product_image = ProductImage.objects.create(
-        product=product,
-        image=image
-      )
 
   return redirect(request.META.get('HTTP_REFERER'))
 
 
 def starter(request):
-
-  context = {}
+  context = {
+    'stripe_products': ProductStripe.objects.all(),
+    'products': Product.objects.all()
+  }
   return render(request, "pages/starter.html", context)
+
+
+def create_related_product(request, stripe_product_id):
+  stripe_product = get_object_or_404(ProductStripe, pk=stripe_product_id)
+  if stripe_product_id:
+    product = Product.objects.create(
+      product_stripe=stripe_product,
+      name=stripe_product.name,
+      price=stripe_product.price,
+      description=stripe_product.description
+    )
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+def edit_product(request, product_id):
+  product = get_object_or_404(Product, pk=product_id)
+  form = ProductForm(instance=product)
+
+  if request.method == 'POST':
+    form = ProductForm(request.POST, request.FILES, instance=product)
+    if form.is_valid():
+      form.save()
+      return redirect(reverse('starter'))
+  
+  context = {
+    'form': form
+  }
+  return render(request, 'pages/edit-product.html', context)
+
+
+
+def product_details(request, product_id):
+  product = get_object_or_404(Product, pk=product_id)
+
+  context = {
+    'product': product
+  }
+  return render(request, 'pages/product-details.html', context)
+
+
+@login_required(login_url='/users/signin/')
+def add_to_cart(request, product_id):
+  product = get_object_or_404(Product, pk=product_id)
+  
+  cart, created = Cart.objects.get_or_create(
+    product=product,
+    user=request.user
+  )
+
+  if not created:
+    cart.quantity += 1
+    cart.save()
+  
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='/users/signin/')
+def cart_list(request):
+  carts = Cart.objects.filter(user=request.user)
+
+  context = {
+    'carts': carts
+  }
+  return render(request, 'pages/cart-list.html', context)
+
+
+@login_required(login_url='/users/signin/')
+def delete_cart(request, cart_id):
+  cart = get_object_or_404(Cart, pk=cart_id)
+  cart.delete()
+  return redirect(request.META.get('HTTP_REFERER'))
