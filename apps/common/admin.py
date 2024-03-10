@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from django.apps import apps
 from django.contrib import admin
+
 # from apps.common.models import Product, ProductImage
 
 # Register your models here.
