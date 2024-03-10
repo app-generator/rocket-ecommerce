@@ -78,7 +78,8 @@ def edit_product(request, product_id):
       return redirect(reverse('load_products'))
   
   context = {
-    'form': form
+    'form': form,
+    'product':product
   }
   return render(request, 'pages/edit-product.html', context)
 
