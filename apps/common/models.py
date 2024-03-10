@@ -19,7 +19,7 @@ class Tag(BaseModel):
 class ProductStripe(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='stripe_product', null=True, blank=True)
+    image = models.URLField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):

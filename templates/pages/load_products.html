@@ -60,7 +60,7 @@
         <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3">
 
             {% for product in products %}
-            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
                 <a href="{% url "product_details" product.id %}">
                     {% if product.img_main %}
                         <img class="rounded-t-lg" src="{{ product.img_main.url }}" alt="product image" />

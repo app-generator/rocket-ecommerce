@@ -1,10 +1,13 @@
 import stripe
+import requests
 from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.core.files.base import ContentFile
+from django.core.files import File
 
 stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
@@ -21,13 +24,18 @@ def index(request):
 def load_stripe_products(request):
   stripe_products = stripe.Product.list(expand=['data.default_price'])
   for stripe_product in stripe_products:
-    product = ProductStripe.objects.update_or_create(
+    product, created = ProductStripe.objects.update_or_create(
       name=stripe_product['name'],
       defaults={
         'description': stripe_product["description"],
-        'price': stripe_product["default_price"]["unit_amount"]/100,
+        'price': stripe_product["default_price"]["unit_amount"]/100
       }
     )
+
+    if stripe_product['images']:
+      product.image = stripe_product['images'][0]
+    
+    product.save()
 
   return redirect(request.META.get('HTTP_REFERER'))
 
@@ -49,6 +57,12 @@ def create_related_product(request, stripe_product_id):
       price=stripe_product.price,
       description=stripe_product.description
     )
+
+    if stripe_product.image:
+      response = requests.get(stripe_product.image)
+      if response.status_code == 200:
+        product.img_main.save(f"{stripe_product_id}_image.jpg", ContentFile(response.content))
+      
   return redirect(request.META.get('HTTP_REFERER'))
 
 
