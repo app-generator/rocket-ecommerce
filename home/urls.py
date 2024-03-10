@@ -17,4 +17,5 @@ urlpatterns = [
     path('increment/<int:cart_id>/', views.increment_cart_item, name='cart_increment'),
     path('decrement/<int:cart_id>/', views.decrement_cart_item, name='cart_decrement'),
     path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
+    path('stripe-credentials/', views.add_stripe_credentials, name='add_stripe_credentials'),
 ]
