@@ -56,6 +56,14 @@ class Cart(BaseModel):
         return self.product.price * self.quantity
 
 
+class StripeCredentials(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    publishable_key = models.CharField(max_length=255)
+    secret_key = models.CharField(max_length=255)
+
+# class ProductImage(BaseModel):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     image = models.ImageField(upload_to='product')
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

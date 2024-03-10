@@ -2,7 +2,7 @@ import stripe
 import requests
 from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart , Order
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -10,7 +10,14 @@ from django.core.files.base import ContentFile
 from django.core.files import File
 from .models import *
 
-stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
+
+def get_stripe_secret_key(request):
+  try:
+    return StripeCredentials.objects.get(user=request.user).secret_key
+  except StripeCredentials.DoesNotExist:
+    return getattr(settings, 'STRIPE_SECRET_KEY', None)
+
+# stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
 
 
@@ -23,6 +30,7 @@ def index(request):
 
 
 def load_stripe_products(request):
+  stripe.api_key = get_stripe_secret_key(request)
   stripe_products = stripe.Product.list(expand=['data.default_price'])
   for stripe_product in stripe_products:
     product, created = ProductStripe.objects.update_or_create(
@@ -78,7 +86,8 @@ def edit_product(request, product_id):
       return redirect(reverse('load_products'))
   
   context = {
-    'form': form
+    'form': form,
+    'product': product
   }
   return render(request, 'pages/edit-product.html', context)
 
@@ -87,7 +96,6 @@ def delete_product(request, id):
   product = get_object_or_404(Product, id=id)
   product.delete()
   return redirect(reverse('load_products'))
-
 
 
 def product_details(request, product_id):
@@ -151,6 +159,7 @@ def decrement_cart_item(request, cart_id):
 
 @login_required(login_url='/users/signin/')
 def create_checkout_session(request):
+    stripe.api_key = get_stripe_secret_key(request)
     carts = Cart.objects.filter(user=request.user, is_ordered=False)
     line_items = []
 
@@ -178,6 +187,17 @@ def create_checkout_session(request):
 
 
 @login_required(login_url='/users/signin/')
+def add_stripe_credentials(request):
+  if request.method == 'POST':
+    StripeCredentials.objects.update_or_create(
+      user=request.user,
+      defaults={
+        'publishable_key': request.POST.get('publishable_key'),
+        'secret_key': request.POST.get('secret_key')
+      }
+    )
+  return redirect(request.META.get('HTTP_REFERER'))
+
 def payment_success(request):
     session_id = request.GET.get('session_id')
     if session_id is None:
