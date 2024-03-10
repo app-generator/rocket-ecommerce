@@ -1,5 +1,5 @@
 import stripe
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart
 from home.forms import ProductForm
@@ -123,3 +123,34 @@ def decrement_cart_item(request, cart_id):
         cart_item.quantity -= 1
         cart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+@login_required(login_url='/users/signin/')
+def create_checkout_session(request):
+
+
+    carts = Cart.objects.filter(user=request.user)
+    line_items = []
+
+    for cart in carts:
+        line_items.append({
+            'price_data': {
+                'currency': 'usd',  
+                'product_data': {
+                    'name': cart.product.name,
+                },
+                'unit_amount': int(cart.product.price * 100), 
+            },
+            'quantity': cart.quantity,
+        })
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=line_items,
+        mode='payment',
+        success_url=request.build_absolute_uri('/success/'),
+        cancel_url=request.build_absolute_uri('/cancel/'),
+    )
+
+    return redirect(session.url)
