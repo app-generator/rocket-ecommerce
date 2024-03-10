@@ -2,12 +2,13 @@ import stripe
 import requests
 from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart, StripeCredentials
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.core.files import File
+from .models import *
 
 
 def get_stripe_secret_key(request):
@@ -18,7 +19,7 @@ def get_stripe_secret_key(request):
 
 # stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
-from .models import *
+
 
 def index(request):
 
@@ -112,7 +113,9 @@ def add_to_cart(request, product_id):
   
   cart, created = Cart.objects.get_or_create(
     product=product,
-    user=request.user
+    user=request.user,
+    is_ordered = False,
+
   )
 
   if not created:
@@ -124,7 +127,7 @@ def add_to_cart(request, product_id):
 
 @login_required(login_url='/users/signin/')
 def cart_list(request):
-  carts = Cart.objects.filter(user=request.user)
+  carts = Cart.objects.filter(user=request.user, is_ordered=False)
 
   context = {
     'carts': carts
@@ -157,18 +160,17 @@ def decrement_cart_item(request, cart_id):
 @login_required(login_url='/users/signin/')
 def create_checkout_session(request):
     stripe.api_key = get_stripe_secret_key(request)
-
-    carts = Cart.objects.filter(user=request.user)
+    carts = Cart.objects.filter(user=request.user, is_ordered=False)
     line_items = []
 
     for cart in carts:
         line_items.append({
             'price_data': {
-                'currency': 'usd',  
+                'currency': 'usd',
                 'product_data': {
                     'name': cart.product.name,
                 },
-                'unit_amount': int(cart.product.price * 100), 
+                'unit_amount': int(cart.product.price * 100),
             },
             'quantity': cart.quantity,
         })
@@ -177,7 +179,7 @@ def create_checkout_session(request):
         payment_method_types=['card'],
         line_items=line_items,
         mode='payment',
-        success_url=request.build_absolute_uri('/success/'),
+        success_url=request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}',
         cancel_url=request.build_absolute_uri('/cancel/'),
     )
 
@@ -195,3 +197,21 @@ def add_stripe_credentials(request):
       }
     )
   return redirect(request.META.get('HTTP_REFERER'))
+
+def payment_success(request):
+    session_id = request.GET.get('session_id')
+    if session_id is None:
+        # Handle the case when session_id is not provided
+        return render(request, 'error.html', {'error_message': 'Invalid session ID'})
+
+    session = stripe.checkout.Session.retrieve(session_id)
+
+    if session.payment_status == 'paid':
+        carts = Cart.objects.filter(user=request.user, is_ordered=False)
+        for cart in carts:
+            cart.is_ordered = True
+            cart.save()
+            Order.objects.create(user=request.user, cart=cart)
+
+    # Add any additional logic or redirect here
+    return render(request, 'success.html')
