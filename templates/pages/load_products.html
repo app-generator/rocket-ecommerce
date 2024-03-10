@@ -43,7 +43,9 @@
                         {% if product.product %}
                            <div class="flex gap-3 mb-3">
                                 <p class="text-green-500">{{ product.product.name }}</p>
-                                <a class="text-blue-600" href="{% url "edit_product" product.product.id %}">Edit</a>
+                                <a class="text-blue-600" href="{% url 'edit_product' product.product.id %}">Edit</a>
+                            
+                                <a class="text-red-600" href="{% url 'delete_local_product' product.product.id  %}">Delete</a>
                            </div>
                         {% else %}
                             <a class="block mb-3 text-blue-600" href="{% url "create_related_product" product.id %}">Create Related Product</a>

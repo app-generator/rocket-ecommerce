@@ -68,6 +68,12 @@ def edit_product(request, product_id):
   return render(request, 'pages/edit-product.html', context)
 
 
+def delete_product(request, id):
+  product = get_object_or_404(Product, id=id)
+  product.delete()
+  return redirect(reverse('load_products'))
+
+
 
 def product_details(request, product_id):
   product = get_object_or_404(Product, pk=product_id)
