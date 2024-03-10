@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from apps.tables.utils import product_filter
+from apps.common.models import Cart
 
 # Create your views here.
 
@@ -28,4 +29,20 @@ def delete_product(request, id):
 
 @login_required(login_url='/users/signin/')
 def update_product(request, id):
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+def increment_cart_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+def decrement_cart_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
