@@ -19,7 +19,7 @@ class Tag(BaseModel):
 class ProductStripe(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    image = models.URLField(null=True, blank=True)
+    image = models.ImageField(upload_to='stripe_product', null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
@@ -49,12 +49,15 @@ class Cart(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    is_ordered = models.BooleanField(default=False)
 
     @property
     def total_price(self):
         return self.product.price * self.quantity
 
 
-# class ProductImage(BaseModel):
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='product')
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
+
