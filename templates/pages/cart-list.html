@@ -37,7 +37,7 @@
                   
                   
                     <div class="flex items-center space-x-4">
-                        <p class="text-sm">${{ cart.total_price }}</p>
+                        <p class="text-sm" id="price-{{ cart.id }}">${{ cart.total_price }}</p>
                         <a href="{% url 'delete_cart' cart.id %}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -47,8 +47,7 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
-    
+        {% endfor %}
       </div>
       <!-- Sub total -->
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
@@ -77,25 +76,56 @@
 
 
 <script>
-  $(document).ready(function() {
-    $('.decrement').click(function() {
-      var input = $(this).siblings('.quantity');
-      var currentValue = parseInt(input.val());
-      if (currentValue > 1) {
-        input.val(currentValue - 1);
-        updateQuantity('{{ cart.id }}', '-', currentValue);
-      }
-    });
+$(document).ready(function() {
+  $('.decrement').click(function() {
+    var input = $(this).siblings('.quantity');
+    var currentValue = parseInt(input.val());
+    if (currentValue > 1)
 
-    $('.increment').click(function() {
-      var input = $(this).siblings('.quantity');
-      var currentValue = parseInt(input.val());
-      input.val(currentValue + 1);
-      updateQuantity('{{ cart.id }}', '+', currentValue);
-    });
+
+    {
+      input.val(currentValue - 1);
+      var cartId = input.attr('id').split('-')[1];
+      updateQuantity(cartId, '-', currentValue);
+    }
   });
+
+  $('.increment').click(function() {
+    var input = $(this).siblings('.quantity');
+    var currentValue = parseInt(input.val());
+    input.val(currentValue + 1);
+    var cartId = input.attr('id').split('-')[1];
+    updateQuantity(cartId, '+', currentValue);
+  });
+});
+
+function updateQuantity(cartId, operator, currentValue) {
+  // Send an AJAX request to update the quantity on the server
+  $.ajax({
+    url: '/update_quantity/', // Replace with the actual URL for updating quantity
+    type: 'POST',
+    data: {
+      cart_id: cartId,
+      operator: operator,
+      current_value: currentValue
+    },
+    success: function(response) {
+      // Handle the response from the server
+      // Update the price and quantity list on the page
+      // You can access the updated values from the 'response' object
+      var updatedPrice = response.updated_price;
+      var updatedQuantity = response.updated_quantity;
+      // Update the price and quantity elements on the page using the updated values
+      // For example:
+      $('#price-' + cartId).text('$' + updatedPrice);
+      $('#quantity-' + cartId).val(updatedQuantity);
+      // You can repeat these steps for each cart item in the list
+    },
+    error: function(error) {
+      // Handle the error case
+      console.log(error);
+    }
+  });
+}
 </script>
-
-
-{% endblock content %}
-
+{% endblock %}
