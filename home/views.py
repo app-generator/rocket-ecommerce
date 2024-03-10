@@ -109,3 +109,17 @@ def delete_cart(request, cart_id):
   cart = get_object_or_404(Cart, pk=cart_id)
   cart.delete()
   return redirect(request.META.get('HTTP_REFERER'))
+
+
+def increment_cart_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+def decrement_cart_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    return redirect(request.META.get('HTTP_REFERER'))
