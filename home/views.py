@@ -180,7 +180,7 @@ def create_checkout_session(request):
         line_items=line_items,
         mode='payment',
         success_url=request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=request.build_absolute_uri('/cancel/'),
+        cancel_url = request.build_absolute_uri(reverse('payment_cancel'))
     )
 
     return redirect(session.url)
@@ -214,4 +214,8 @@ def payment_success(request):
             Order.objects.create(user=request.user, cart=cart)
 
     # Add any additional logic or redirect here
-    return render(request, 'success.html')
+    return render(request, 'pages/payment-success.html')
+
+
+def payment_cancel(request):
+   return render(request, 'pages/payment-cancel.html')
