@@ -1,8 +1,8 @@
 import stripe
 import requests
-from django.shortcuts import render, redirect, get_object_or_404 , HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404 
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -17,7 +17,6 @@ def get_stripe_secret_key(request):
   except StripeCredentials.DoesNotExist:
     return getattr(settings, 'STRIPE_SECRET_KEY', None)
 
-# stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY')
 
 
 
@@ -219,3 +218,17 @@ def payment_success(request):
 
 def payment_cancel(request):
    return render(request, 'pages/payment-cancel.html')
+
+
+
+def category_page(request):
+   products = Product.objects.prefetch_related('tags')
+
+
+   print(products,'----------------------------------------------')
+
+   context = {
+      'products':products,
+
+   }
+   return render(request, 'pages/category-list.html',context)
