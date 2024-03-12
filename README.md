@@ -8,7 +8,7 @@
         </a>
     </h1>
     <p>
-        <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong>
+        <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong> &bull; <strong>Lifetime Updates</strong> &bull; <strong>Unlimited Projects</strong>
     </p>  
     <h3>
         <a href="https://github.com/app-generator/rocket-ecommerce">
@@ -23,6 +23,12 @@
             Buy $99 🛒
         </a>
     </h3>    
+    <p>
+        Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like Images, Tags, Discount, .. etc.
+        <br />
+        The product comes with Docker and CI/CD support.  
+    </p>  
+    <hr />
 </div>
 
 <br />
@@ -57,17 +63,6 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 <br />
 
 ## Features 
-
-> How It Works
-
-Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like:
-
-- Images
-- Tags
-- Discount
-- Featured  
-
-<br />
 
 | Status | Item | info | 
 | --- | --- | --- |
