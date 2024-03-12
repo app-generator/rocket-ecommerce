@@ -33,7 +33,7 @@
 
 <br />
 
-## Why [Rocket Django](https://github.com/app-generator/rocket-ecommerce)
+## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce)
 
 #### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
