@@ -6,17 +6,14 @@
     <h1 class="text-3xl font-bold mb-4 text-center">All Categories</h1>
 
     <div class="grid flow-root gap-4 flow-col-4 flow-row-4">
-        {% for product in products %}
-            {% if product.tags.all %}
-                <h1>
-                    <a href="{% url 'product_details' product.id %}" class="text-gray-300">{{ product.name }}</a>
-                </h1>
-                <ul>
-                    {% for tag in product.tags.all %}
-                        <li class="bg-blue-500 text-white px-2 py-1 rounded-md inline-block mr-2">{{ tag }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+        {% for tag in tags %}
+       
+            <h1>
+                <a href="{% url 'category_products' tag.name %}" class="bg-blue-500 text-white px-2 py-1 rounded-md inline-block mr-2">
+                    {{ tag.name }} ({{ tag.count }}) 
+                </a>
+                
+            </h1>
         {% endfor %}
     </div>
 </div>

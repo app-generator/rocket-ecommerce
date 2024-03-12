@@ -1,5 +1,6 @@
 import stripe
 import requests
+from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag
@@ -222,13 +223,23 @@ def payment_cancel(request):
 
 
 def category_page(request):
-   products = Product.objects.prefetch_related('tags')
-
-
-   print(products,'----------------------------------------------')
+   all_products = Product.objects.all()
+   tags = Tag.objects.filter(product__in=all_products).values('name').annotate(count=Count('name'))
 
    context = {
-      'products':products,
-
+      'tags': tags,
    }
-   return render(request, 'pages/category-list.html',context)
+   return render(request,'pages/category-list.html', context)
+
+
+
+def category_products(request,name):
+    tag = get_object_or_404(Tag , name=name)
+    products = tag.product_set.all()
+
+
+    context = {
+        'tag':tag,
+        'products': products,
+    }
+    return render(request, 'pages/category-products.html', context)
