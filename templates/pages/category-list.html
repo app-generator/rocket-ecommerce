@@ -3,13 +3,17 @@
 {% block content %}
 
 <div class="container mx-auto my-8 p-6 bg-white rounded-lg">
-    <h1 class="text-3xl font-bold mb-4 text-center">All Categories</h1>
+    <div class="flex justify-center items-center">
+        <h1 class="text-xl font-bold mb-4 text-center bg-red-200 rounded text-red-600 px-4 py-2 inline-block text-center">
+          Categories
+        </h1>
+      </div>
 
-    <div class="grid flow-root gap-4 flow-col-4 flow-row-4">
+    <div class="flex justify-center items-center">
         {% for tag in tags %}
        
-            <h1>
-                <a href="{% url 'category_products' tag.name %}" class="bg-blue-500 text-white px-2 py-1 rounded-md inline-block mr-2">
+            <h1 >
+                <a href="{% url 'category_products' tag.name %}" class="bg-blue-600 text-white p-4 rounded-md inline-block mr-2">
                     {{ tag.name }} ({{ tag.count }}) 
                 </a>
                 
