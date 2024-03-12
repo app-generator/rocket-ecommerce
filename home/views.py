@@ -223,12 +223,23 @@ def payment_cancel(request):
 
 
 def category_page(request):
-   tags = Tag.objects.annotate(products_count=Count('product')).filter(products_count__gt=0)
-
+   all_products = Product.objects.all()
+   tags = Tag.objects.filter(product__in=all_products).values('name').annotate(count=Count('name'))
 
    context = {
-      'tags':tags,
-      
-
+      'tags': tags,
    }
-   return render(request, 'pages/category-list.html',context)
+   return render(request,'pages/category-list.html', context)
+
+
+
+def category_products(request,name):
+    tag = get_object_or_404(Tag , name=name)
+    products = tag.product_set.all()
+
+
+    context = {
+        'tag':tag,
+        'products': products,
+    }
+    return render(request, 'pages/category-products.html', context)
