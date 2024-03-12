@@ -243,3 +243,44 @@ def category_products(request,name):
         'products': products,
     }
     return render(request, 'pages/category-products.html', context)
+
+
+
+
+def discounted_product_list(request):
+    discounted_products = Product.objects.filter(discount__isnull=False)
+    context = {
+        'products': discounted_products,
+    }
+
+    return render(request, 'pages/discounted-product.html', context)
+
+
+def homepage(request):
+    products = Product.objects.all()
+    context = {
+       'products':products
+    }
+    return render(request, 'pages/home-page.html',context)
+
+
+
+def fetch_stripe_transactions(request):
+    stripe.api_key = get_stripe_secret_key(request)
+    charges = stripe.Charge.list(limit=10, expand=['data.payment_method_details.card'])
+    transactions = []
+    for charge in charges.data:
+        card_number = ''
+        if charge.payment_method_details and charge.payment_method_details.type == 'card':
+            card_number = charge.payment_method_details.card.last4
+        
+        transaction = {
+            'transaction_number': charge.id,
+            'amount': charge.amount / 100,  
+            'currency': charge.currency.upper(),
+            'card_number': card_number,
+            'payment_status': charge.status,
+        }
+        transactions.append(transaction)
+
+    return render(request, 'pages/transaction.html', {'transactions': transactions})

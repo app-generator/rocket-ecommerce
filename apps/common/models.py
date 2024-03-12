@@ -39,8 +39,11 @@ class Product(BaseModel):
     tags = models.ManyToManyField(Tag, blank=True)
     stock = models.IntegerField(null=True, blank=True)
     featured = models.BooleanField(default=False)
-    promo = models.BooleanField(default=False)
+    discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True,null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def discounted_price(self):
+        return self.price - (self.price * (self.discount / 100))
 
     def __str__(self):
         return self.name
@@ -53,7 +56,11 @@ class Cart(BaseModel):
 
     @property
     def total_price(self):
-        return self.product.price * self.quantity
+        if self.product.discount:
+            discounted_price = self.product.discounted_price()
+            return discounted_price * self.quantity
+        else:
+            return self.product.price * self.quantity
 
 
 class StripeCredentials(BaseModel):
