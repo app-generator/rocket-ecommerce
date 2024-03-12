@@ -33,6 +33,7 @@ urlpatterns = [
 
     #homepage
     path('homepage/', views.homepage, name='home_page'),
+    path('transaction/', views.fetch_stripe_transactions, name='transaction'),
 
 
 

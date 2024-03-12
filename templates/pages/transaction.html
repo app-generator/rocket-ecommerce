@@ -1,0 +1,43 @@
+{% extends "layouts/base-products.html" %}
+
+{% block content %}
+
+<div class="container mx-auto mt-5">
+    <table class="table w-full divide-y divide-gray-200 rounded-md">
+    <thead>
+        <tr class="text-left bg-gray-800 text-white">
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Transaction Number</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Amount</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Card Number</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Payment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+            <tr class="hover:bg-gray-100">
+                <td class="px-4 py-2 text-gray-700">{{ transaction.transaction_number }}</td>
+                <td class="px-4 py-2 text-green-600 ">${{ transaction.amount }}</td>
+                <td class="px-4 py-2 text-gray-700">* * * * {{transaction.card_number }}</td>
+                <td class="px-4 py-2 ">
+                    <div class="
+                {% if transaction.payment_status == 'succeeded' %}
+                    bg-green-200 text-green-600
+                {% elif transaction.payment_status == 'canceled' %}
+                    bg-red-200 text-red-600
+                {% else %}
+                    bg-gray-200 text-gray-600
+                {% endif %}
+                inline-block px-2 py-1 rounded
+            ">
+                {{ transaction.payment_status }}
+            </div>
+                    
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock content %}
