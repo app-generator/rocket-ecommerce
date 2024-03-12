@@ -56,7 +56,11 @@ class Cart(BaseModel):
 
     @property
     def total_price(self):
-        return self.product.price * self.quantity
+        if self.product.discount:
+            discounted_price = self.product.discounted_price()
+            return discounted_price * self.quantity
+        else:
+            return self.product.price * self.quantity
 
 
 class StripeCredentials(BaseModel):

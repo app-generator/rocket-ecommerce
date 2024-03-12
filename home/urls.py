@@ -26,7 +26,14 @@ urlpatterns = [
 
     #Category
     path('category-list/', views.category_page, name='category_list'),
-    path('category-product/<str:name>/', views.category_products, name='category_products')
+    path('category-product/<str:name>/', views.category_products, name='category_products'),
+
+    #Discount
+    path('discounted-products/', views.discounted_product_list, name='discounted_product_list'),
+
+    #homepage
+    path('homepage/', views.homepage, name='home_page'),
+
 
 
 ]

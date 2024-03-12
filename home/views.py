@@ -243,3 +243,22 @@ def category_products(request,name):
         'products': products,
     }
     return render(request, 'pages/category-products.html', context)
+
+
+
+
+def discounted_product_list(request):
+    discounted_products = Product.objects.filter(discount__isnull=False)
+    context = {
+        'products': discounted_products,
+    }
+
+    return render(request, 'pages/discounted-product.html', context)
+
+
+def homepage(request):
+    products = Product.objects.all()
+    context = {
+       'products':products
+    }
+    return render(request, 'pages/home-page.html',context)
