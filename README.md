@@ -33,7 +33,11 @@
 
 <br />
 
-## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - **Only [$99](https://appseed.gumroad.com/l/rocket-ecommerce)** (secured by GUMROAD)
+## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) 
+
+> 🛒 **Only [$99](https://appseed.gumroad.com/l/rocket-ecommerce)** (secured by GUMROAD) for `unlimited projects`, `lifetime updates` and [Support](https://appseed.us/support/) 
+
+<br />
 
 #### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
