@@ -19,8 +19,8 @@
             DEMO
         </a>
         &nbsp; &bull; &nbsp;
-        <a href="https://appseed.us/support/">
-            Support 🚀
+        <a href="https://appseed.gumroad.com/l/rocket-ecommerce">
+            $99 🛒
         </a>
     </h3>    
 </div>
