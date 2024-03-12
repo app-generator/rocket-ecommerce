@@ -1,22 +1,22 @@
 <div align="center">
-    <a href="https://rocket-django.onrender.com">
+    <a href="https://rocket-ecommerce.onrender.com">
         <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272178364-cbac6d97-b2dc-4d95-bab6-891f4ee7d84d.png"" width="64" height="64" alt="Rocket Icon">
     </a>
     <h1>
-        <a href="https://rocket-django.onrender.com">
-            Rocket Django
+        <a href="https://rocket-ecommerce.onrender.com">
+            Rocket eCommerce
         </a>
     </h1>
     <p>
-        <strong>TailwindCSS</strong> &bull; <strong>Flowbite</strong> &bull; <strong>API (DRF)</strong> &bull; <strong>Celery Beat</strong> &bull; <strong>DataTables</strong> &bull; <strong>Charts</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong>
+        <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong>
     </p>  
     <h3>
-        <a href="https://docs.appseed.us/products/rocket/django/">
+        <a href="https://github.com/app-generator/rocket-ecommerce">
            📖 DOCS
         </a>
         &nbsp; &bull; &nbsp; 
-        <a href="https://www.youtube.com/watch?v=rSFLcv00Bw8">
-            Video
+        <a href="https://rocket-ecommerce.onrender.com">
+            DEMO
         </a>
         &nbsp; &bull; &nbsp;
         <a href="https://appseed.us/support/">
@@ -28,16 +28,16 @@
 <br />
 
 <div align="center">
-    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272299949-6f4a8fd7-7cce-472a-9566-9519db338c7d.gif" alt="Django Rocket - Open-source Starter styled with Tailwind and Flowbite.">
+    <img src="https://github.com/app-generator/priv-rocket-ecommerce/assets/51070104/9ab8b4fd-754b-4caf-8573-0de8ea5f4530" alt="Rocket eCommerce - Django Starter styled with Tailwind and Flowbite.">
 </div>
 
 <br />
 
-## Why [Rocket Django](https://github.com/app-generator/rocket-django)
+## Why [Rocket Django](https://github.com/app-generator/rocket-ecommerce)
 
-#### ***Supercharge your app instantly, launch faster, make $***
+#### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
-Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. **Rocket Django** provides you with the boilerplate code you need to launch, FAST. 
+Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. **Rocket eCommerce** provides you with the boilerplate code you need to launch, FAST. 
 
 #### ***Rocket your startup in days, not weeks*** 
 
@@ -57,11 +57,11 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 
 ## Manual Build 
 
-> 👉 Download code
+> 👉 Download code - Requires a [purchase](#) (secured by GUMROAD)
 
 ```bash
-$ git clone https://github.com/app-generator/rocket-django.git
-$ cd rocket-django
+$ unzip rocket-ecommerce.zip
+$ cd rocket-ecommerce
 ```
 
 > 👉 Create `.env` from `env.sample`
@@ -119,37 +119,13 @@ $ python manage.py runserver       # start the project
 
 <br />
 
-## Free vs. `PRO`
-
-> `Have questions?` Contact **[Support](https://appseed.us/support/)** (Email & Discord) provided by **AppSeed**
-
-| Free Version                            | PRO - 🛒 **[$199](https://appseed.gumroad.com/l/rocket-django)** | Enterprise - 🛒 **[$4,999](https://appseed.gumroad.com/l/rocket-django-enterprise)** |  
-| --------------------------------------| --------------------------------------| --------------------------------------|
-| ✓ **Django 4.1.12**                                                 | **Everything in Free**, plus:                                                       | **Everything in PRO**, plus:          |
-| ✓ Best Practices                                                    | ✅ **OAuth** `Google`, `GitHub`                                                     | ✅ **[CSV to Model Generator](https://www.youtube.com/watch?v=O6c76T3VYU8)**         | 
-| ✓ **TailwindCSS**/`Flowbite`                                        | ✅ **Enhanced** [Charts](https://rocket-django-pro.onrender.com/charts/)            | ✅ **[CSV Data Loader](https://www.youtube.com/watch?v=O6c76T3VYU8)**                |
-| ✓ Extended User Model                                               | ✅ **Enhanced** [DataTables](https://rocket-django-pro.onrender.com/tables/)        | ✅ **2 Weeks Custom Development**     |
-| ✓ `Simple` [Charts](https://rocket-django.onrender.com/charts/)     | ✅ **[Media Files Manager](https://rocket-django-pro.onrender.com/file-manager/)**  | ✅ **1 Hour Video Call Presentation** |
-| ✓ `Simple` [DataTables](https://rocket-django.onrender.com/tables/) | ✅ **Stripe** Payments                                                              | ✅ Dedicated Support                  |
-| ✓ [API](https://rocket-django.onrender.com/api/product/) via `DRF`  | ✅ **Wagtail** CMS                                                                  | ✅ LIVE Deploy Assistance             |
-| ✓ [Celery Beat](https://rocket-django.onrender.com/tasks/)          | ✅ **Multi-Language** (i18n) Support                                                | ✅ CI/CD for AWS, Azure, DO           |
-| ✓ `Docker`                                                          | ✅ **Sentry** `Error Reporting`                                                     | -                                      |
-| ✓ `CI/CD` Flow via Render                                           | ✅ **PRO Support** - [Email & Discord](https://appseed.us/support/)                 | -                                      |
-| ✓ `Free Support` (GitHub Issues)                                    | ✅ `Unlimited Projects`                                                             | -                                      |
-|  -                                                                  | ✅ `Private REPO Access`                                                            | -                                      |
-|  -                                                                  | ✅ `Lifetime Updates`                                                               | -                                      |
-| ------------------------------------| ------------------------------------| ------------------------------------|
-| 🚀 [LIVE Demo](https://rocket-django.onrender.com/)                | 🚀 [LIVE Demo](https://rocket-django-pro.onrender.com/) | 🛒 `Order`: **[$4,999](https://appseed.gumroad.com/l/rocket-django-enterprise)** |   
-
-<br />
-
 ## Start With Docker
 
-> 👉 Download code
+> 👉 Download code - Requires a [purchase](#) (secured by GUMROAD)
 
 ```bash
-$ git clone https://github.com/app-generator/rocket-django.git
-$ cd rocket-django
+$ unzip rocket-ecommerce.zip
+$ cd rocket-ecommerce
 ```
 
 > 👉 Start with Docker Compose
@@ -268,9 +244,9 @@ At this point, the product should be LIVE.
 
 ## License
 
-@MIT
+[EULA](https://github.com/app-generator/license-eula)
 
 <br />
 
 ---
-[Rocket Django](https://github.com/app-generator/rocket-django) - Open-source starter styled with `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
+Rocket eCommerce - Django eCommerce starter styled with `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
