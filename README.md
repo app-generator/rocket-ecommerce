@@ -20,7 +20,7 @@
         </a>
         &nbsp; &bull; &nbsp;
         <a href="https://appseed.gumroad.com/l/rocket-ecommerce">
-            $99 🛒
+            Buy $99 🛒
         </a>
     </h3>    
 </div>
