@@ -1,80 +1,17 @@
 [
     {
-       "tag": "dresses"
+       "tag": "ui-kit"
     },
     {
-       "tag": "jackets"
+       "tag": "dashboard"
     },
     {
-       "tag": "sweaters"
+       "tag": "admin"
     },
     {
-       "tag": "pants"
-    },
-    {
-       "tag": "skirts"
-    },
-    {
-       "tag": "shorts"
-    },
-    {
-       "tag": "t-shirts"
-    },
-    {
-       "tag": "blouses"
-    },
-    {
-       "tag": "shirts"
-    },
-    {
-       "tag": "polo shirts"
-    },
-    {
-       "tag": "hoodies"
-    },
-    {
-       "tag": "tank tops"
-    },
-    {
-       "tag": "socks"
-    },
-    {
-       "tag": "hats"
-    },
-    {
-       "tag": "scarves"
-    },
-    {
-       "tag": "gloves"
-    },
-    {
-       "tag": "belts"
-    },
-    {
-       "tag": "boots"
-    },
-    {
-       "tag": "sandals"
-    },
-    {
-       "tag": "sneakers"
-    },
-    {
-       "tag": "handbags"
-    },
-    {
-       "tag": "watches"
-    },
-    {
-       "tag": "jewelry"
-    },
-    {
-       "tag": "sunglasses"
-    },
-    {
-       "tag": "vests"
-    },
-    {
-       "tag": "blazers"
-    }
+      "tag": "tailwind"
+   },
+   {
+      "tag": "black-design"
+   }
  ]
