@@ -33,7 +33,7 @@
 
 <br />
 
-## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce)
+## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - **Only [$99](https://appseed.gumroad.com/l/rocket-ecommerce)** (secured by GUMROAD)
 
 #### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
@@ -57,7 +57,7 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 
 ## Manual Build 
 
-> 👉 Download code - Requires a [purchase](#) (secured by GUMROAD)
+> 👉 Download code - Requires a [purchase](https://appseed.gumroad.com/l/rocket-ecommerce) (secured by GUMROAD)
 
 ```bash
 $ unzip rocket-ecommerce.zip
@@ -121,7 +121,7 @@ $ python manage.py runserver       # start the project
 
 ## Start With Docker
 
-> 👉 Download code - Requires a [purchase](#) (secured by GUMROAD)
+> 👉 Download code - Requires a [purchase](https://appseed.gumroad.com/l/rocket-ecommerce) (secured by GUMROAD)
 
 ```bash
 $ unzip rocket-ecommerce.zip
