@@ -12,7 +12,7 @@
     </p>  
     <h3>
         <a href="https://github.com/app-generator/rocket-ecommerce">
-           📖 DOCS
+           📖 Docs
         </a>
         &nbsp; &bull; &nbsp; 
         <a href="https://rocket-ecommerce.onrender.com">
