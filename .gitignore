@@ -18,3 +18,4 @@ yarn.lock
 pnpm-lock.yaml
 
 tasks_logs/
+.env__
