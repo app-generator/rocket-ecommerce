@@ -2,7 +2,7 @@ import stripe
 import requests
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag
 from home.forms import ProductForm
@@ -217,7 +217,7 @@ def add_stripe_credentials(request):
       )
     return redirect(request.META.get('HTTP_REFERER'))
   else:
-    return redirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse('DEMO Mode: Operation not allowed', status=405)
 
 
 @login_required(login_url='/users/signin/')
@@ -323,3 +323,7 @@ def show_order(request):
    }
 
    return render(request,'pages/order-list.html',context)
+
+
+def dashboard_settings(request):
+   return render(request, 'dashboard/settings.html')
