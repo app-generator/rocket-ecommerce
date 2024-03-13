@@ -65,7 +65,7 @@ class Cart(BaseModel):
         
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ManyToManyField(Cart)
     created_at = models.DateTimeField(auto_now_add=True, null = True, blank=True)
 
     class Meta:
