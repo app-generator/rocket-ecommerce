@@ -3,9 +3,53 @@
 {% extends "layouts/base-products.html" %}
 
 {% block content %}
+<style>
+  /* Add custom styles here if needed */
+  @keyframes zoomIn {
+      0% {
+          transform: scale(0);
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
 
-<section class="h-screen bg-gray-100 pt-20">
-    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3">
+  .zoomIn {
+      animation: zoomIn 0.5s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+      0% {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      100% {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  .slideIn {
+      animation: slideIn 0.5s ease-out forwards;
+  }
+</style>
+
+
+<div class="bg-gray-100 pt-10 mt-10">
+  <div class="relative mx-auto max-w-screen-xl mt-5">
+      <img src="https://builtin.com/sites/www.builtin.com/files/styles/og/public/2022-07/ai-retail-ecommerce.png" alt="Hero Image" class="w-full h-auto filter">
+      <div class="absolute inset-0 flex justify-center items-center">
+          <div class="text-center text-white">
+              <h1 id="zoomElement" class="text-4xl font-bold mb-4">Welcome to Our Store</h1>
+              <p id="slideElement" class="text-lg mb-8">Discover amazing products</p>
+              <a href="#" id="scrollButton" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-md">Shop Now</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<section class="bg-gray-100 pt-10" >
+    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3" id='scrollTarget'>
 
         {% for product in products %}
         <a href="{% url 'product_details' product.id %}">
@@ -51,7 +95,46 @@
 </section>  
 
 
+<script>
+  document.getElementById('scrollButton').addEventListener('click', function () {
+      document.getElementById('scrollTarget').scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+</script>
 
+<script>
+  function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+  }
+
+  function handleAnimation() {
+      const zoomElement = document.getElementById('zoomElement');
+      const slideElement = document.getElementById('slideElement');
+      if (isInViewport(zoomElement)) {
+          zoomElement.classList.add('zoomIn');
+      } else {
+          zoomElement.classList.remove('zoomIn');
+      }
+      if (isInViewport(slideElement)) {
+          slideElement.classList.add('slideIn');
+      } else {
+          slideElement.classList.remove('slideIn');
+      }
+  }
+
+  // Trigger animations when scrolling
+  window.addEventListener('scroll', handleAnimation);
+
+  // Initial check for animations on page load
+  handleAnimation();
+</script>
 
 
 {% endblock %}
