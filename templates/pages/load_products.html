@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <section class="bg-white dark:bg-gray-900 h-screen ">
+    <section class=" ">
         <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div class="place-self-center mr-auto lg:col-span-5">
                 <h1
@@ -42,39 +42,41 @@
           
             </div>
             <div class="mx-auto max-w-screen-xl ">
-    <table class="table w-full table-bordered border-gray-500 rounded">
-        <thead>
-            <tr class="text-left bg-zinc-900 text-white">
-                <th class="px-6 py-3">Stripe Product</th>
-                <th class="px-6 py-3">Price</th>
-                <th class="px-6 py-3">Create Local</th>
-                <th class="px-6 py-3">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in stripe_products %}
-            <tr class="border-b border-gray-500">
-                <td class="px-6 py-4">{{ product.name }}</td>
-                <td class="px-6 py-4">{{ product.price }}</td>
-                <td class="px-6 py-4">{% if product.product %}
-                    <div class="flex gap-3 mb-3">
-                        <p class="text-green-500">{{ product.product.name }}</p>
-                    </div>
-                    {% else %}
-                    <a class="block mb-3 text-blue-600" href="{% url "create_related_product" product.id %}">Create Related Product</a>
-                    {% endif %}
-                </td>
-                <td class="px-6 py-4">{% if product.product %}
-                    <div class="flex gap-3 mb-3 mt-3">
-                        <a class="bg-green-200 text-green-500 px-4 py-2 rounded-md" href="{% url 'edit_product' product.product.id %}">Edit</a>
-                        <a class="bg-red-200 text-red-500 px-4 py-2 rounded-md" href="{% url 'delete_local_product' product.product.id  %}">Delete</a>
-                    </div>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <table id="stripe-products" class="w-full border-collapse mt-2">
+                    <thead>
+                        <tr class="bg-gray-900 text-white">
+                            <th class="px-6 py-3 text-left">Stripe Product</th>
+                            <th class="px-6 py-3 text-left">Price</th>
+                            <th class="px-6 py-3 text-left">Create Local</th>
+                            <th class="px-6 py-3 text-left">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in stripe_products %}
+                        <tr class="border-b border-gray-500 hover:bg-gray-100">
+                            <td class="px-6 py-4">{{ product.name }}</td>
+                            <td class="px-6 py-4">{{ product.price }}</td>
+                            <td class="px-6 py-4">
+                                {% if product.product %}
+                                <div class="flex flex-col gap-2">
+                                    <p class="text-green-500">{{ product.product.name }}</p>
+                                </div>
+                                {% else %}
+                                <a class="block text-blue-600" href="{% url "create_related_product" product.id %}">Create Related Product</a>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4">
+                                {% if product.product %}
+                                <div class="flex gap-2">
+                                    <a class="text-white bg-blue-700 px-4 py-2 rounded-md" href="{% url 'edit_product' product.product.id %}">Edit</a>
+                                    <a class="text-white bg-red-700 px-4 py-2 rounded-md" href="{% url 'delete_local_product' product.product.id  %}">Delete</a>
+                                </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 </div>
 
     </section>
@@ -119,5 +121,19 @@
     </div>
 </div> 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#stripe-products').DataTable({
+            "paging": true,
+            "searching": true,
+            "responsive": true,
+            "dom": '<"flex justify-between items-center px-4"i><"flex justify-end items-center px-4"l>fBrtip',
+          
+        });
+    });
+</script>
 {% endblock %}

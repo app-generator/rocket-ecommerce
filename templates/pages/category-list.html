@@ -2,25 +2,25 @@
 
 {% block content %}
 
-<div class="container mx-auto my-8 p-6 bg-white rounded-lg">
-    <div class="flex justify-center items-center">
-        <h1 class="text-xl font-bold mb-4 text-center bg-red-200 rounded text-red-600 px-4 py-2 inline-block text-center">
-          Categories
-        </h1>
-      </div>
 
-    <div class="flex justify-center items-center">
+<div class="container mx-auto py-8 mt-10">
+    <div class="flex items-center justify-center mb-5 mt-5">
+        <hr class="border-t border-gray-300 flex-grow mr-4">
+        <h1 class="text-xl font-semibold text-center text-gray-600">Categories</h1>
+        <hr class="border-t border-gray-300 flex-grow ml-4">
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {% for tag in tags %}
-       
-            <h1 >
-                <a href="{% url 'category_products' tag.name %}" class="bg-blue-600 text-white p-4 rounded-md inline-block mr-2">
-                    {{ tag.name }} ({{ tag.count }}) 
-                </a>
-                
-            </h1>
+        <div class="p-4 bg-blue-700 text-white text-center rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+            <a href="{% url 'category_products' tag.name %}" class="">
+            <h2 class="text-lg font-semibold">{{ tag.name }} ({{ tag.count }}) </h2>
+        </a>
+        
+        </div>
         {% endfor %}
+        
+        <!-- Add more category items as needed -->
     </div>
 </div>
-<hr>
 
 {% endblock %}

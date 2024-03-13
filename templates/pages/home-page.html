@@ -3,54 +3,138 @@
 {% extends "layouts/base-products.html" %}
 
 {% block content %}
+<style>
+  /* Add custom styles here if needed */
+  @keyframes zoomIn {
+      0% {
+          transform: scale(0);
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
 
-<section class="h-screen bg-gray-100 pt-20">
-    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3">
+  .zoomIn {
+      animation: zoomIn 0.5s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+      0% {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      100% {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  .slideIn {
+      animation: slideIn 0.5s ease-out forwards;
+  }
+</style>
+
+
+<div class="bg-gray-100 pt-10 mt-10">
+  <div class="relative mx-auto max-w-screen-xl mt-5">
+      <img src="https://builtin.com/sites/www.builtin.com/files/styles/og/public/2022-07/ai-retail-ecommerce.png" alt="Hero Image" class="w-full h-auto filter">
+      <div class="absolute inset-0 flex justify-center items-center">
+          <div class="text-center text-white">
+              <h1 id="zoomElement" class="text-4xl font-bold mb-4">Welcome to Our Store</h1>
+              <p id="slideElement" class="text-lg mb-8">Discover amazing products</p>
+              <a href="#" id="scrollButton" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-md">Shop Now</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<section class="bg-gray-100 pt-10" >
+    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3" id='scrollTarget'>
 
         {% for product in products %}
-        <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
-            <a href="{% url "product_details" product.id %}">
+        <a href="{% url 'product_details' product.id %}">
+        <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
+            <div class="relative">
                 {% if product.img_main %}
-                    <img class="rounded-t-lg" src="{{ product.img_main.url }}" alt="product image" />
+                <img class="rounded-t-lg hover:scale-110 transition duration-300" src="{{ product.img_main.url }}" alt="product image" />
+
+            {% endif %}
+              <div class="absolute top-2 right-2">
+                {% if product.discount %}
+                <div class="bg-red-400 text-white rounded-md py-1 px-2">
+                    
+                  <span class="text-xl">-{{ product.discounted_price|floatformat:"0" }}%</span>
+                  
+                </div>
                 {% endif %}
-            </a>
-            <div class="px-3 pb-5 mt-3">
-                <a href="{% url "product_details" product.id %}">
-                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h5>
-                </a>
-                <div class="flex items-center mt-2.5 mb-5">
-                    <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                        </svg>
-                    </div>
-                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
-                </div>
-                <div class="mb-3">
-                    <span>{{ product.short_description }}</span>
-                </div>
-                <div class="flex items-center justify-between">
-                    <span class="text-3xl font-bold text-gray-900 dark:text-white">${{ product.price }}</span>
-                    <a href="{% url "add_to_cart" product.id %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-                </div>
+              </div>
             </div>
-        </div>
+            <div class="p-4">
+              <h2 class="text-xl font-medium text-gray-800">{{ product.name }}</h2>
+              <div class="flex flex-col mt-4">
+                {% if product.discount %}
+                
+                <div class="flex gap-2 items-center justify-start">
+                    <span class="text-gray-800 font-medium line-through">${{product.price}}</span>
+                    <span class="text-gray-800 font-medium text-xl">${{product.discounted_price}}</span>
+                    <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
+                  </div>
+                  {% else %}
+                  <span class="text-gray-800 font-medium text-xl">${{product.price}}</span>
+                {% endif %}
+                  
+              </div>
+            </div>
+          </div>
+        </a>
         {% endfor %}
     
     </div>
+
+    
 </section>  
+
+
+<script>
+  document.getElementById('scrollButton').addEventListener('click', function () {
+      document.getElementById('scrollTarget').scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+</script>
+
+<script>
+  function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+  }
+
+  function handleAnimation() {
+      const zoomElement = document.getElementById('zoomElement');
+      const slideElement = document.getElementById('slideElement');
+      if (isInViewport(zoomElement)) {
+          zoomElement.classList.add('zoomIn');
+      } else {
+          zoomElement.classList.remove('zoomIn');
+      }
+      if (isInViewport(slideElement)) {
+          slideElement.classList.add('slideIn');
+      } else {
+          slideElement.classList.remove('slideIn');
+      }
+  }
+
+  // Trigger animations when scrolling
+  window.addEventListener('scroll', handleAnimation);
+
+  // Initial check for animations on page load
+  handleAnimation();
+</script>
 
 
 {% endblock %}

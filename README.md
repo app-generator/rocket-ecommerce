@@ -24,9 +24,9 @@
         </a>
     </h3>    
     <p>
-        Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like Images, Tags, Discount, .. etc.
-        <br />
-        The product comes with Docker and CI/CD support.  
+        <strong>Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like Images, Tags, Discount, .. etc.</strong>
+        <br /> <br />
+        The product comes with Docker and CI/CD Support.  
     </p>  
     <hr />
 </div>
