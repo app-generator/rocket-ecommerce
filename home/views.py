@@ -14,10 +14,14 @@ from .models import *
 
 
 def get_stripe_secret_key(request):
-  try:
-    return StripeCredentials.objects.get(user=request.user).secret_key
-  except StripeCredentials.DoesNotExist:
-    return getattr(settings, 'STRIPE_SECRET_KEY', None)
+  demo_mode = getattr(settings, 'DEMO_MODE')
+  if not demo_mode:
+    try:
+      return StripeCredentials.objects.get(user=request.user).secret_key
+    except StripeCredentials.DoesNotExist:
+      return getattr(settings, 'STRIPE_SECRET_KEY', None)
+  else:
+     return getattr(settings, 'STRIPE_SECRET_KEY', None)
 
 
 def staff_member_required(view_func):
@@ -62,7 +66,8 @@ def load_stripe_products(request):
 def load_products(request):
   context = {
     'stripe_products': ProductStripe.objects.all(),
-    'products': Product.objects.all()
+    'products': Product.objects.all(),
+    'demo_mode': getattr(settings, 'DEMO_MODE')
   }
   return render(request, "pages/load_products.html", context)
 
@@ -200,15 +205,20 @@ def create_checkout_session(request):
 
 @login_required(login_url='/users/signin/')
 def add_stripe_credentials(request):
-  if request.method == 'POST':
-    StripeCredentials.objects.update_or_create(
-      user=request.user,
-      defaults={
-        'publishable_key': request.POST.get('publishable_key'),
-        'secret_key': request.POST.get('secret_key')
-      }
-    )
-  return redirect(request.META.get('HTTP_REFERER'))
+  demo_mode = getattr(settings, 'DEMO_MODE')
+  if not demo_mode:
+    if request.method == 'POST':
+      StripeCredentials.objects.update_or_create(
+        user=request.user,
+        defaults={
+          'publishable_key': request.POST.get('publishable_key'),
+          'secret_key': request.POST.get('secret_key')
+        }
+      )
+    return redirect(request.META.get('HTTP_REFERER'))
+  else:
+    return redirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required(login_url='/users/signin/')
 def payment_success(request):
