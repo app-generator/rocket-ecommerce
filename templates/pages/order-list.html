@@ -1,41 +1,67 @@
-{% extends "layouts/base-products.html" %}
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block messages %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="flex items-center p-4 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>{{ message }}</div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock messages %}
 
 {% block content %}
 
-
-<div class="container mx-auto py-8 mt-10">
-    <div class="flex items-center justify-center mb-5 mt-5">
-        <hr class="border-t border-gray-300 flex-grow mr-4">
-        <h1 class="text-xl font-semibold text-center text-gray-600">All Orders</h1>
-        <hr class="border-t border-gray-300 flex-grow ml-4">
+<div class="m-5 bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden ">
+    <div class="px-6 py-4">
+        <!-- Card Title -->
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-200">Order List</h2>
     </div>
-   
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    
+                    <th scope="col" class="px-6 py-3">
+                        Orders
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Order Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ order.cart }}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ order.created_at|date:"Y-m-d" }}
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Product name
-                </th>
-               
-            </tr>
-        </thead>
-        {% for order in orders %}
-        <tbody>
-          
-            
-            <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{order}}
-                </th>
-               
-            </tr>
-        </tbody>
-        {% endfor %}
-    </table>
+                    </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
-</div>
 
-{% endblock %}
+{% endblock content %}
+
+
+{% block extra_js %}
+
+
+
+
+{% endblock extra_js %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 
@@ -64,7 +65,12 @@ class Cart(BaseModel):
         
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null = True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+    
 
 
 class StripeCredentials(BaseModel):
