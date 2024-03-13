@@ -61,6 +61,10 @@ class Cart(BaseModel):
             return discounted_price * self.quantity
         else:
             return self.product.price * self.quantity
+        
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
 
 
 class StripeCredentials(BaseModel):
@@ -72,7 +76,4 @@ class StripeCredentials(BaseModel):
 #     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 #     image = models.ImageField(upload_to='product')
 
-class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
 

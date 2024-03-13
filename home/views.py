@@ -301,3 +301,15 @@ def fetch_stripe_transactions(request):
         transactions.append(transaction)
 
     return render(request, 'pages/transaction.html', {'transactions': transactions})
+
+
+
+@login_required(login_url='/users/signin/')
+def show_order(request):
+   orders= Order.objects.filter(user=request.user)
+   cart = 121
+   context = {
+      'orders':orders,
+   }
+
+   return render(request,'pages/order-list.html',context)
