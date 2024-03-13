@@ -34,7 +34,7 @@
 <br />
 
 <div align="center">
-    <img src="https://github.com/app-generator/rocket-ecommerce/assets/51070104/710c992d-f421-456e-bc46-2e00cf29104b" alt="Rocket eCommerce - Django Starter styled with Tailwind and Flowbite.">
+    <img src="https://github.com/app-generator/rocket-ecommerce/assets/51070104/8d6942bd-2b3f-46e0-88cc-cdc9b4c68e29" alt="Rocket eCommerce - Django Starter styled with Tailwind and Flowbite.">
 </div>
 
 <br />
