@@ -30,8 +30,8 @@
                 {% if product.discount %}
                 
                 <div class="flex gap-2 items-center justify-start">
-                    <span class="text-gray-800 font-medium line-through">${{product.price}}</span>
-                    <span class="text-gray-800 font-medium text-xl">${{product.discounted_price|floatformat:2}}</span>
+                    <span class="text-gray-800 font-medium line-through">${{product.discounted_price|floatformat:2}}</span>
+                    <span class="text-gray-800 font-medium text-xl">${{product.price}}</span>
                     <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
                   </div>
                   {% else %}

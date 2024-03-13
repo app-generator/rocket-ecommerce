@@ -325,5 +325,7 @@ def show_order(request):
    return render(request,'pages/order-list.html',context)
 
 
+@staff_member_required
+@login_required(login_url='/admin/')
 def dashboard_settings(request):
    return render(request, 'dashboard/settings.html')
