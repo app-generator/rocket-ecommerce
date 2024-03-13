@@ -2,11 +2,12 @@ import stripe
 import requests
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
+from django.http import HttpResponseForbidden
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag
 from home.forms import ProductForm
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required , user_passes_test
 from django.core.files.base import ContentFile
 from django.core.files import File
 from .models import *
@@ -19,6 +20,13 @@ def get_stripe_secret_key(request):
     return getattr(settings, 'STRIPE_SECRET_KEY', None)
 
 
+def staff_member_required(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if not request.user.is_staff:
+            return HttpResponseForbidden("You do not have permission to access this page.")
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
 
 
 def index(request):
@@ -29,6 +37,7 @@ def index(request):
   return render(request, "dashboard/index.html", context)
 
 
+@staff_member_required
 def load_stripe_products(request):
   stripe.api_key = get_stripe_secret_key(request)
   stripe_products = stripe.Product.list(expand=['data.default_price'])
@@ -49,6 +58,7 @@ def load_stripe_products(request):
   return redirect(request.META.get('HTTP_REFERER'))
 
 
+@staff_member_required
 def load_products(request):
   context = {
     'stripe_products': ProductStripe.objects.all(),
@@ -56,7 +66,7 @@ def load_products(request):
   }
   return render(request, "pages/load_products.html", context)
 
-
+@staff_member_required
 def create_related_product(request, stripe_product_id):
   stripe_product = get_object_or_404(ProductStripe, pk=stripe_product_id)
   if stripe_product_id:
@@ -75,6 +85,7 @@ def create_related_product(request, stripe_product_id):
   return redirect(request.META.get('HTTP_REFERER'))
 
 
+@staff_member_required
 def edit_product(request, product_id):
   product = get_object_or_404(Product, pk=product_id)
   form = ProductForm(instance=product)
@@ -91,7 +102,7 @@ def edit_product(request, product_id):
   }
   return render(request, 'pages/edit-product.html', context)
 
-
+@staff_member_required
 def delete_product(request, id):
   product = get_object_or_404(Product, id=id)
   product.delete()
@@ -141,13 +152,14 @@ def delete_cart(request, cart_id):
   cart.delete()
   return redirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required(login_url='/users/signin/')
 def increment_cart_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id)
     cart_item.quantity += 1
     cart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/users/signin/')
 def decrement_cart_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id)
     if cart_item.quantity > 1:
@@ -198,6 +210,7 @@ def add_stripe_credentials(request):
     )
   return redirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/users/signin/')
 def payment_success(request):
     session_id = request.GET.get('session_id')
     if session_id is None:
@@ -217,6 +230,7 @@ def payment_success(request):
     return render(request, 'pages/payment-success.html')
 
 
+@login_required(login_url='/users/signin/')
 def payment_cancel(request):
    return render(request, 'pages/payment-cancel.html')
 
@@ -256,6 +270,7 @@ def discounted_product_list(request):
     return render(request, 'pages/discounted-product.html', context)
 
 
+
 def homepage(request):
     products = Product.objects.all()
     context = {
@@ -265,6 +280,8 @@ def homepage(request):
 
 
 
+@staff_member_required
+@login_required(login_url='/admin/')
 def fetch_stripe_transactions(request):
     stripe.api_key = get_stripe_secret_key(request)
     charges = stripe.Charge.list(limit=10, expand=['data.payment_method_details.card'])
