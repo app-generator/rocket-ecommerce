@@ -1,7 +1,25 @@
-{% extends "layouts/base-products.html" %}
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block messages %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="flex items-center p-4 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>{{ message }}</div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock messages %}
 
 {% block content %}
-
+<div class="m-5 bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden ">
     <section class=" ">
         <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div class="place-self-center mr-auto lg:col-span-5">
@@ -43,85 +61,61 @@
         
           
             </div>
-            <div class="mx-auto max-w-screen-xl ">
-                <table id="stripe-products" class="w-full border-collapse mt-2">
-                    <thead>
-                        <tr class="bg-gray-900 text-white">
-                            <th class="px-6 py-3 text-left">Stripe Product</th>
-                            <th class="px-6 py-3 text-left">Price</th>
-                            <th class="px-6 py-3 text-left">Create Local</th>
-                            <th class="px-6 py-3 text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for product in stripe_products %}
-                        <tr class="border-b border-gray-500 hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ product.name }}</td>
-                            <td class="px-6 py-4">{{ product.price }}</td>
-                            <td class="px-6 py-4">
-                                {% if product.product %}
+
+
+<div class=" relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="m-2 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr class="">
+                <th class="px-6 py-3 text-left">Stripe Product</th>
+                <th class="px-6 py-3 text-left">Price</th>
+                <th class="px-6 py-3 text-left">Create Local</th>
+                <th class="px-6 py-3 text-left">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in stripe_products %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ product.name }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ product.price }}
+                </td>
+                <td class="px-6 py-4">
+                    {% if product.product %}
                                 <div class="flex flex-col gap-2">
                                     <p class="text-green-500">{{ product.product.name }}</p>
                                 </div>
                                 {% else %}
                                 <a class="block text-blue-600" href="{% url "create_related_product" product.id %}">Create Related Product</a>
                                 {% endif %}
-                            </td>
-                            <td class="px-6 py-4">
-                                {% if product.product %}
+                </td>
+                <td class="px-6 py-4">
+                    {% if product.product %}
                                 <div class="flex gap-2">
                                     <a class="text-white bg-blue-700 px-4 py-2 rounded-md" href="{% url 'edit_product' product.product.id %}">Edit</a>
                                     <a class="text-white bg-red-700 px-4 py-2 rounded-md" href="{% url 'delete_local_product' product.product.id  %}">Delete</a>
                                 </div>
                                 {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                </td>
+              
+            </tr>
+            {% endfor %}
+           
+           
+        </tbody>
+    </table>
 </div>
+
+
 
     </section>
 
+</div>
 
 
 
-    <!-- Main modal -->
-{% comment %} <div id="stripe-keys" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Add your stripe credentials
-                </h3>
-                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="stripe-keys">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="p-4 md:p-5">
-                <form method="post" action="{% url "add_stripe_credentials" %}" class="space-y-4">
-                    {% csrf_token %}
-
-                    <div>
-                        <label for="publishable_key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Publishable Key</label>
-                        <input type="text" value="{{ request.user.stripecredentials.publishable_key }}" name="publishable_key" placeholder="Your publishable key" id="publishable_key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
-                    </div>
-                    <div>
-                        <label for="secret_key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Secret Key</label>
-                        <input type="text" value="{{ request.user.stripecredentials.secret_key }}" name="secret_key" id="secret_key" placeholder="Your secret key" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-                    </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>  {% endcomment %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

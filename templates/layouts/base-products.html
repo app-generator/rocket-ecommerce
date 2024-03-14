@@ -96,9 +96,7 @@
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Rocket</span>
                 </a>
             <ul class="flex space-x-6">
-                {% if user.is_staff %}
-                <li><a href="{% url 'load_products' %}" class="hover:underline" aria-current="page">Products</a></li>
-                {% endif %}
+               
                 <li><a href="{% url 'category_list' %}" class="hover:underline" aria-current="page">Categories</a></li>
                 <li><a href="{% url 'discounted_product_list' %}" class="hover:underline" aria-current="page">Discount</a></li>
             </ul>

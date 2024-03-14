@@ -53,40 +53,40 @@
 
         {% for product in products %}
         <a href="{% url 'product_details' product.id %}">
-        <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
-            <div class="relative">
-                {% if product.img_main %}
-                <img class="rounded-t-lg hover:scale-110 transition duration-300" src="{{ product.img_main.url }}" alt="product image" />
-
-            {% endif %}
-              <div class="absolute top-2 right-2">
-                {% if product.discount %}
-                <div class="bg-red-400 text-white rounded-md py-1 px-2">
-                    
-                  <span class="text-xl">-{{ product.discount|floatformat:"0" }}%</span>
-                  
-                </div>
+            <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
+                <div class="relative">
+                    {% if product.img_main %}
+                    <img class="rounded-t-lg hover:scale-110 transition duration-300" src="{{ product.img_main.url }}" alt="product image" />
+    
                 {% endif %}
-              </div>
-            </div>
-            <div class="p-4">
-              <h2 class="text-xl font-medium text-gray-800">{{ product.name }}</h2>
-              <div class="flex flex-col mt-4">
-                {% if product.discount %}
-                
-                <div class="flex gap-2 items-center justify-start">
-                    <span class="text-gray-800 font-medium line-through">${{product.price}}</span>
-                    <span class="text-gray-800 font-medium text-xl">${{ product.discounted_price|floatformat:2 }}</span>
-                    <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
+                  <div class="absolute top-2 right-2">
+                    {% if product.discount %}
+                    <div class="bg-red-400 text-white rounded-md py-1 px-2">
+                        
+                      <span class="text-xl">-{{ product.discount|floatformat:"0" }}%</span>
+                      
+                    </div>
+                    {% endif %}
                   </div>
-                  {% else %}
-                  <span class="text-gray-800 font-medium text-xl">${{product.price|floatformat:2 }}</span>
-                {% endif %}
-                  
+                </div>
+                <div class="p-4">
+                  <h2 class="text-xl font-medium text-gray-800">{{ product.name }}</h2>
+                  <div class="flex flex-col mt-4">
+                    {% if product.discount %}
+                    
+                    <div class="flex gap-2 items-center justify-start">
+                        <span class="text-gray-800 font-medium line-through">${{product.discounted_price|floatformat:2}}</span>
+                        <span class="text-gray-800 font-medium text-xl">${{product.price}}</span>
+                        <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
+                      </div>
+                      {% else %}
+                      <span class="text-gray-800 font-medium text-xl">${{product.price|floatformat:2}}</span>
+                    {% endif %}
+                      
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </a>
+            </a>
         {% endfor %}
     
     </div>
