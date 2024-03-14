@@ -231,13 +231,15 @@ def payment_success(request):
 
     if session.payment_status == 'paid':
         carts = Cart.objects.filter(user=request.user, is_ordered=False)
+        order = Order.objects.create(user=request.user)
         for cart in carts:
             cart.is_ordered = True
-            cart.save()
-            Order.objects.create(user=request.user, cart=cart)
+            cart.save()       
+            order.cart.add(cart)
 
     # Add any additional logic or redirect here
     return render(request, 'pages/payment-success.html')
+
 
 
 @login_required(login_url='/users/signin/')
@@ -317,7 +319,8 @@ def fetch_stripe_transactions(request):
 @login_required(login_url='/users/signin/')
 def show_order(request):
    orders= Order.objects.filter(user=request.user)
-   cart = 121
+
+   
    context = {
       'orders':orders,
    }

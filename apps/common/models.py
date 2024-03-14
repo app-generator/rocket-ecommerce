@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from decimal import Decimal
 
 # Create your models here.
 
@@ -48,6 +49,8 @@ class Product(BaseModel):
     def __str__(self):
         return self.name
 
+
+
 class Cart(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -58,13 +61,24 @@ class Cart(BaseModel):
     def total_price(self):
         if self.product.discount:
             discounted_price = self.product.discounted_price()
-            return discounted_price * self.quantity
+            return (discounted_price * self.quantity).quantize(Decimal('0.00'))
         else:
-            return self.product.price * self.quantity
+            return (self.product.price * self.quantity).quantize(Decimal('0.00'))
         
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
+    cart = models.ManyToManyField(Cart)
+    created_at = models.DateTimeField(auto_now_add=True, null = True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+    
+    def total_order(self):
+        total_price = Decimal('0')
+        for cart in self.cart.all():
+            total_price += cart.total_price
+        return total_price.quantize(Decimal('0.00'))
+    
 
 
 class StripeCredentials(BaseModel):
