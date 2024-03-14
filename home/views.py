@@ -318,7 +318,10 @@ def fetch_stripe_transactions(request):
 
 @login_required(login_url='/users/signin/')
 def show_order(request):
-   orders= Order.objects.filter(user=request.user)
+   if request.user.is_superuser:
+        orders = Order.objects.all()
+   else:
+        orders = Order.objects.filter(user=request.user)
 
    
    context = {
