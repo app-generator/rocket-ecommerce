@@ -45,7 +45,7 @@
                             <button 
                             data-modal-target="default-modal-{{order.id}}" 
                             data-modal-toggle="default-modal-{{order.id}}" 
-                            class="border border-gray-400 text-gray-700 hover:text-gray-900 hover:border-gray-500 py-2 px-4 rounded inline-flex items-center"
+                            class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
                             type="button"
                             >
                             Orders
@@ -72,21 +72,24 @@
                                             <table class="table table-auto w-full">
                                                 <thead>
                                                     <tr>
+                                                        <th class="px-4 py-2 text-left">User</th>
                                                         <th class="px-4 py-2 text-left">Product</th>
                                                         <th class="px-4 py-2 text-left">Quantity</th>
                                                         <th class="px-4 py-2 text-left">Total Price</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    
                                                     {% for cart in order.cart.all %}
                                                     <tr>
+                                                        <td class="px-4 py-2 border text-left">{{ order.user.username }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.product.name }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.quantity }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.total_price }}</td>
                                                     </tr>
                                                     {% endfor %}
                                                     <tr class="font-bold">
-                                                        <td class="px-4 py-2 border text-left" colspan="2">Total Order</td>
+                                                        <td class="px-4 py-2 border text-left" colspan="3">Total Order</td>
                                                         <td class="px-4 py-2 border text-left">{{ order.total_order }}</td>
                                                     </tr>
                                                 </tbody>
