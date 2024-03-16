@@ -35,63 +35,43 @@
 </style>
 
 
-<div class="bg-gray-100 pt-10 mt-10">
-  <div class="relative mx-auto max-w-screen-xl mt-5">
-      <img src="https://builtin.com/sites/www.builtin.com/files/styles/og/public/2022-07/ai-retail-ecommerce.png" alt="Hero Image" class="w-full h-auto filter">
-      <div class="absolute inset-0 flex justify-center items-center">
-          <div class="text-center text-white">
-              <h1 id="zoomElement" class="text-4xl font-bold mb-4">Welcome to Our Store</h1>
-              <p id="slideElement" class="text-lg mb-8">Discover amazing products</p>
-              <a href="#" id="scrollButton" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-md">Shop Now</a>
-          </div>
-      </div>
-  </div>
-</div>
-
-<section class="bg-gray-100 pt-10" >
-    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3" id='scrollTarget'>
-
-        {% for product in products %}
-        <a href="{% url 'product_details' product.id %}">
-            <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
-                <div class="relative">
-                    {% if product.img_main %}
-                    <img class="rounded-t-lg hover:scale-110 transition duration-300" src="{{ product.img_main.url }}" alt="product image" />
-    
-                {% endif %}
-                  <div class="absolute top-2 right-2">
-                    {% if product.discount %}
-                    <div class="bg-red-400 text-white rounded-md py-1 px-2">
-                        
-                      <span class="text-xl">-{{ product.discount|floatformat:"0" }}%</span>
-                      
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="p-4">
-                  <h2 class="text-xl font-medium text-gray-800">{{ product.name }}</h2>
-                  <div class="flex flex-col mt-4">
-                    {% if product.discount %}
-                    
-                    <div class="flex gap-2 items-center justify-start">
-                        <span class="text-gray-800 font-medium line-through">${{product.discounted_price|floatformat:2}}</span>
-                        <span class="text-gray-800 font-medium text-xl">${{product.price}}</span>
-                        <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
-                      </div>
-                      {% else %}
-                      <span class="text-gray-800 font-medium text-xl">${{product.price|floatformat:2}}</span>
-                    {% endif %}
-                      
-                  </div>
-                </div>
-              </div>
-            </a>
-        {% endfor %}
-    
+<section class="bg-white dark:bg-gray-900 border-b border-gray-200">
+    <div class="max-w-screen-2xl px-4 py-80 mx-auto">
+        <div class="">
+            <h1 class="text-center text-3xl">
+                Ecommerce Starter Template
+            </h1>
+        </div>
     </div>
+</section>
 
-    
+<section class="bg-white pt-10 mb-16 pb-40 border-b border-gray-200">
+    <div class="mt-28">
+        <div class="flex justify-between max-w-screen-2xl mx-auto px-5 mb-10">
+            <span class="block text-lg">Latest Drops</span>
+            <a class="flex text-blue-600 text-sm" href="#">
+                <span>View all</span>
+                <svg class="w-5 h-5 text-blue-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                </svg>              
+            </a>
+        </div>
+        <div class="grid mx-auto max-w-screen-2xl gap-14 lg:grid-cols-3 px-5" id='scrollTarget'>
+            {% for product in products %}
+            <a class="group" href="{% url 'product_details' product.id %}">
+                <div class="max-w-full mx-auto bg-white rounded-lg overflow-hidden border border-gray-200" style="height: 570px;">
+                    {% if product.img_main %}
+                        <img class="rounded-t-lg h-full object-cover" src="{{ product.img_main.url }}" alt="product image" />
+                    {% endif %}
+                </div>
+                <div class="flex justify-between mt-5">
+                    <span class="block text-sm text-slate-700">{{ product.name }}</span>
+                    <span class="block text-sm text-slate-500">€{{ product.price }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
 </section>  
 
 
