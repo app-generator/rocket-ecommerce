@@ -299,7 +299,7 @@ def fetch_stripe_transactions(request):
     stripe.api_key = get_stripe_secret_key(request)
     charges = stripe.Charge.list()
     for charge in charges:
-        charge.amount = charge.amount / 100 
+        charge.amount = charge.amount / 100
 
     context = {
         'charges': charges
