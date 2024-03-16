@@ -1,45 +1,43 @@
-{% extends "layouts/base.html" %}
-{% load static %}
+{% extends "layouts/base-products.html" %}
 
-{% block messages %}
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="flex items-center p-4 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-            </svg>
-            <span class="sr-only">Info</span>
-            <div>{{ message }}</div>
-        </div>
-    {% endfor %}
-{% endif %}
-
-
-{% endblock messages %}
 {% block content %}
 
-<div class="container mx-auto mt-10">
-    <table class="table w-full divide-y divide-gray-200 rounded-md mt-10">
-        <thead>
-            <tr class="text-left bg-gray-800 text-white">
-                <th class="px-4 py-2 font-medium text-xs tracking-wider">Paid by</th>
-                <th class="px-4 py-2 font-medium text-xs tracking-wider">Payment Method</th>
-                <th class="px-4 py-2 font-medium text-xs tracking-wider">Amount</th>
-                <th class="px-4 py-2 font-medium text-xs tracking-wider">Payment Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for charge in charges %}
-                <tr class="hover:bg-gray-100">
-                    <td class="px-4 py-2 text-gray-700">{% if charge.customer %}{{ charge.customer.name }}{% else %}Guest{% endif %}</td> 
-                    <td class="px-4 py-2 text-gray-700">{{ charge.payment_method_details.card.brand }} * * *{{ charge.payment_method_details.card.last4 }}</td>
-                    <td class="px-4 py-2 text-gray-700">${{ charge.amount }}</td>
-                    <td class="px-4 py-2 text-gray-700">{{ charge.status }}</td>
+<div class="container mx-auto mt-5">
+    <table class="table w-full divide-y divide-gray-200 rounded-md">
+    <thead>
+        <tr class="text-left bg-gray-800 text-white">
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Transaction Number</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Amount</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Card Number</th>
+            <th class="px-4 py-2 font-medium text-xs tracking-wider">Payment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+            <tr class="hover:bg-gray-100">
+                <td class="px-4 py-2 text-gray-700">{{ transaction.transaction_number }}</td>
+                <td class="px-4 py-2 text-green-600 ">${{ transaction.amount }}</td>
+                <td class="px-4 py-2 text-gray-700">* * * * {{transaction.card_number }}</td>
+                <td class="px-4 py-2 ">
+                    <div class="
+                {% if transaction.payment_status == 'succeeded' %}
+                    bg-green-200 text-green-600
+                {% elif transaction.payment_status == 'canceled' %}
+                    bg-red-200 text-red-600
+                {% else %}
+                    bg-gray-200 text-gray-600
+                {% endif %}
+                inline-block px-2 py-1 rounded
+            ">
+                {{ transaction.payment_status }}
+            </div>
                     
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </div>
+
 {% endblock content %}
