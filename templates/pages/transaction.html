@@ -21,42 +21,49 @@
 
 {% block content %}
 
-<div class="container mx-auto mt-5">
-    <table class="table w-full divide-y divide-gray-200 rounded-md">
-    <thead>
-        <tr class="text-left bg-gray-800 text-white">
-            <th class="px-4 py-2 font-medium text-xs tracking-wider">Transaction Number</th>
-            <th class="px-4 py-2 font-medium text-xs tracking-wider">Amount</th>
-            <th class="px-4 py-2 font-medium text-xs tracking-wider">Card Number</th>
-            <th class="px-4 py-2 font-medium text-xs tracking-wider">Payment Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for transaction in transactions %}
-            <tr class="hover:bg-gray-100">
-                <td class="px-4 py-2 text-gray-700">{{ transaction.transaction_number }}</td>
-                <td class="px-4 py-2 text-green-600 ">${{ transaction.amount }}</td>
-                <td class="px-4 py-2 text-gray-700">* * * * {{transaction.card_number }}</td>
-                <td class="px-4 py-2 ">
-                    <div class="
-                {% if transaction.payment_status == 'succeeded' %}
-                    bg-green-200 text-green-600
-                {% elif transaction.payment_status == 'canceled' %}
-                    bg-red-200 text-red-600
-                {% else %}
-                    bg-gray-200 text-gray-600
-                {% endif %}
-                inline-block px-2 py-1 rounded
-            ">
-                {{ transaction.payment_status }}
-            </div>
-                    
+<div class="m-5 bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden ">
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Customer
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Payment Method
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Amount
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for charge in charges %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {% if charge.customer %}{{ charge.customer.name }}{% else %}Guest{% endif %}
+                </th>
+                <td class="px-6 py-4">
+                    {{ charge.payment_method_details.card.brand }} * * * {{ charge.payment_method_details.card.last4 }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ charge.amount|floatformat:"2" }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ charge.status }}
                 </td>
                 
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+</div>
 </div>
 
 {% endblock content %}

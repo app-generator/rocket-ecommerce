@@ -296,23 +296,14 @@ def homepage(request):
 @login_required(login_url='/admin/')
 def fetch_stripe_transactions(request):
     stripe.api_key = get_stripe_secret_key(request)
-    charges = stripe.Charge.list(limit=10, expand=['data.payment_method_details.card'])
-    transactions = []
-    for charge in charges.data:
-        card_number = ''
-        if charge.payment_method_details and charge.payment_method_details.type == 'card':
-            card_number = charge.payment_method_details.card.last4
-        
-        transaction = {
-            'transaction_number': charge.id,
-            'amount': charge.amount / 100,  
-            'currency': charge.currency.upper(),
-            'card_number': card_number,
-            'payment_status': charge.status,
-        }
-        transactions.append(transaction)
+    charges = stripe.Charge.list()
+    for charge in charges:
+        charge.amount = charge.amount / 100 
 
-    return render(request, 'pages/transaction.html', {'transactions': transactions})
+    context = {
+        'charges': charges
+    }
+    return render(request, 'pages/transaction.html', context)
 
 
 
