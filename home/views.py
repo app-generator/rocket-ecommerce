@@ -26,10 +26,11 @@ def get_stripe_secret_key(request):
 
 def staff_member_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
-        if not request.user.is_staff:
-            return HttpResponseForbidden("You do not have permission to access this page.")
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return redirect('signin')  
         return view_func(request, *args, **kwargs)
     return _wrapped_view
+
 
 
 
@@ -293,7 +294,7 @@ def homepage(request):
 
 
 @staff_member_required
-@login_required(login_url='/admin/')
+@login_required(login_url='/users/signin/')
 def fetch_stripe_transactions(request):
     stripe.api_key = get_stripe_secret_key(request)
     charges = stripe.Charge.list()
