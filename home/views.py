@@ -118,7 +118,8 @@ def product_details(request, product_id):
   product = get_object_or_404(Product, pk=product_id)
 
   context = {
-    'product': product
+    'product': product,
+    'related_products': Product.objects.exclude(pk=product.pk).filter(tags__in=product.tags.all())
   }
   return render(request, 'pages/product-details.html', context)
 
@@ -172,7 +173,14 @@ def decrement_cart_item(request, cart_id):
         cart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required(login_url='/users/signin/')
+def update_cart_quantity(request, cart_id):
+   cart_item = get_object_or_404(Cart, id=cart_id)
+   if request.method == 'POST':
+      quantity = request.POST.get('quantity')
+      cart_item.quantity = quantity
+      cart_item.save()
+   return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/users/signin/')
 def create_checkout_session(request):

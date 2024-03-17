@@ -3,21 +3,7 @@
 
 {% block content %}
 
-<!-- component -->
-<!-- Create By Joker Banny -->
-<style>
-    @layer utilities {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-
-</style>
-
-
-  <div class="h-screen bg-gray-100 pt-20">
+  {% comment %} <div class="h-screen bg-gray-100 pt-20 max-w-xl">
     <h1 class="mb-10 text-center text-2xl font-bold">Cart Items</h1>
     <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div class="rounded-lg md:w-2/3">
@@ -112,7 +98,117 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
+
+  <section class="text-gray-700 body-font overflow-hidden bg-white border-b">
+    <div class="max-w-screen-2xl mx-auto px-5 py-24">
+      <div class="grid grid-cols-5 gap-3">
+        <div class="col-span-4 w-11/12">
+          <h3 class="text-3xl text-black font-medium mb-5">Cart</h3>
+
+          <div class="relative overflow-x-auto sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-white dark:text-gray-400">
+                <tr class="border-b">
+                  <th scope="col" class="py-3">
+                    Item
+                  </th>
+                  <th scope="col" class="py-3">
+                    Quantity
+                  </th>
+                  <th scope="col" class="py-3">
+                    Price
+                  </th>
+                  <th scope="col" class="py-3">
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cart in carts %}
+                <tr class="bg-white border-b bg-white">
+                  <td class="py-4">
+                    <div class="flex items-center gap-3">
+                      <img src="{{ cart.product.img_main.url }}" class="block w-24 h-24 border rounded-lg object-cover" alt="Apple Watch">
+                      <div>
+                        <span class="block mb-2">{{ cart.product.name }}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-4 font-semibold text-gray-900 dark:text-white">
+                    <div class="flex items-center gap-3">
+                      <a href="{% url 'delete_cart' cart.id %}">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                        </svg>
+                      </a>
+                      <form method="post" action="{% url "update_cart_quantity" cart.id %}" class="cart-form max-w-sm">
+                        {% csrf_token %}
+
+                        <select name="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          {% for value in 10|times %}
+                            <option {% if value == cart.quantity %} selected {% endif %} value="{{ value }}">{{ value }}</option>
+                          {% endfor %}
+                        </select>
+                      </form>   
+                    </div>                 
+                  </td>
+                  <td class="py-4">
+                    ${{ cart.product.price }}
+                  </td>
+                  <td class="py-4 font-semibold text-gray-900 dark:text-white">
+                    ${{ cart.total_price }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div>
+          <h3 class="text-3xl text-black font-medium mb-5">Summary</h3>
+          <hr class="mb-5">
+          <div class="mb-5">
+            <div class="flex justify-between mb-3 text-sm font-normal">
+              <span class="block">Subtotal</span>
+              <span class="block">€{{ carts|get_total }}</span>
+            </div>
+            <div class="flex justify-between mb-3 text-sm font-normal">
+              <span class="block">Shipping</span>
+              <span class="block">€1.99</span>
+            </div>
+            <div class="flex justify-between mb-3 text-sm font-normal">
+              <span class="block">Taxes</span>
+              <span class="block">€0.00</span>
+            </div>
+          </div>
+          <hr class="mb-5">
+          <div class="mb-5">
+            <div class="flex justify-between mb-3 text-sm font-normal">
+              <span class="block">Total</span>
+              <span class="block text-xl font-medium text-black">€{{ carts|get_total:"1.99" }}</span>
+            </div>
+          </div>
+          <hr class="mb-5">
+          <a class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2" href="{% url "create_checkout_session" %}">Go to checkout</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
+
+{% block extra_js %}
+
+<script>
+  document.querySelectorAll('.cart-form select').forEach(function(select) {
+      select.addEventListener('change', function() {
+          this.parentNode.submit();
+      });
+  });
+</script>
+
+{% endblock extra_js %}
