@@ -1,4 +1,5 @@
 {% extends "layouts/base-products.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -93,11 +94,80 @@
                 </div>
 
                 <div class="lg:w-1/2 px-10">
-                    {% if product.img_main %}
-                        <img alt="ecommerce" style="height: 770px;" class="w-full object-cover object-center rounded border border-gray-200" src="{{ product.img_main.url }}">
-                    {% else %}
-                        <img alt="ecommerce" style="height: 770px;" class="w-full object-cover object-center rounded border border-gray-200" src="#">
-                    {% endif %}
+                    <div class="slide-wrapper">
+                        <div class="swiper bannerSliderLarge" data-aos="zoom-in" data-aos-delay="100">
+                           <div class="swiper-wrapper">
+                               {% if product.img_main %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_main.url }}">
+                                </div>
+                                {% endif %}
+                                {% if product.img_1 %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_1.url }}">
+                                </div>
+                                {% endif %}
+                                {% if product.img_2 %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_2.url }}">
+                                </div>
+                                {% endif %}
+                                {% if product.img_3 %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_3.url }}">
+                                </div>
+                                {% endif %}
+                                {% if product.img_4 %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_4.url }}">
+                                </div>
+                                {% endif %}
+                                {% if product.img_5 %}
+                                <div class="swiper-slide">
+                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_5.url }}">
+                                </div>
+                                {% endif %}
+                           </div>
+                           <div class="swiper-button-prev"></div>
+                           <div class="separator"></div>
+                           <div class="swiper-button-next"></div>
+                         </div>
+                         <div thumbsSlider="" class="swiper bannerThumbSlider">
+                            <div class="swiper-wrapper justify-center">
+                                {% if product.img_main %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="100">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_main.url }}" />
+                                </div>
+                                {% endif %}
+                                {% if product.img_1 %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="200">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_1.url }}" />
+                                </div>
+                                {% endif %}
+                                {% if product.img_2 %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="300">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_2.url }}" />
+                                </div>  
+                                {% endif %}
+                                {% if product.img_3 %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="400">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_3.url }}" />
+                                </div>   
+                                {% endif %}
+                                {% if product.img_4 %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="500">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_4.url }}" />
+                                </div>             
+                                {% endif %}
+                                {% if product.img_5 %}
+                                <div class="swiper-slide" data-aos="zoom-in-left" data-aos-delay="600">
+                                    <img class="border rounded-xl h-16 w-16 object-cover" src="{{ product.img_5.url }}" />
+                                </div> 
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="lg:w-1/4 w-full pl-5 mt-28">
