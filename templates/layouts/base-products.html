@@ -14,7 +14,7 @@
         content="Open-Source Django starter styled with Tailwind/Flowbite - Actively supported by AppSeed.">
 
     <link rel="canonical" href="https://github.com/app-generator/rocket-django">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{% static 'dist/main.css' %}">
 </head>
 <body>
@@ -139,7 +139,27 @@
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="{% static 'dist/main.bundle.js' %}"></script>
+    <script>
+        var swiper = new Swiper(".bannerThumbSlider", {
+          spaceBetween: 10,
+          slidesPerView: 4,
+          freeMode: true,
+          breakpoints: {
+            575: {
+              spaceBetween: 20,
+            },
+          },
+        });
+        var swiper2 = new Swiper(".bannerSliderLarge", {
+          centeredSlides: true,
+          spaceBetween: 0,
+          thumbs: {
+            swiper: swiper,
+          },
+        });
+    </script>
     {% block extra_js %}{% endblock extra_js %}
 </body>
 
