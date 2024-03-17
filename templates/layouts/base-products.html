@@ -16,6 +16,48 @@
     <link rel="canonical" href="https://github.com/app-generator/rocket-django">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{% static 'dist/main.css' %}">
+    <style>
+        .swiper-slide{
+            width: fit-content;
+        }
+        .swiper-slide:last-child {
+            margin-right: 0 !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            position: absolute;
+            bottom: 5%;
+            top: auto;
+        }
+        .swiper-button-next {
+            right: 44%;
+            transform: translateX(50%);
+        }
+        .swiper-button-prev {
+            left: 44%;
+            transform: translateX(-50%);
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 58px;
+            color: rgb(156 163 175);
+        }
+        .separator {
+            position: absolute;
+            bottom: 5%;
+            top: auto;
+            height: 20px;
+            width: 2px;
+            background: rgb(156 163 175);
+            z-index: 999;
+            left: 50%;
+        }
+        .swiper-button-next:after {
+            content: "\2192";
+        }
+        .swiper-button-prev:after {
+            content: "\2190";
+        }
+        
+    </style>
 </head>
 <body>
 
@@ -144,19 +186,24 @@
     <script>
         var swiper = new Swiper(".bannerThumbSlider", {
           spaceBetween: 10,
-          slidesPerView: 4,
+          slidesPerView: 'auto',
           freeMode: true,
           breakpoints: {
             575: {
               spaceBetween: 20,
             },
-          },
+          }
         });
         var swiper2 = new Swiper(".bannerSliderLarge", {
           centeredSlides: true,
+          loop: true,
           spaceBetween: 0,
           thumbs: {
             swiper: swiper,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
           },
         });
     </script>
