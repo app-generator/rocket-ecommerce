@@ -1064,6 +1064,12 @@ input:checked + .toggle-bg {
 .top-3 {
   top: 0.75rem;
 }
+.bottom-2 {
+  bottom: 0.5rem;
+}
+.bottom-2\.5 {
+  bottom: 0.625rem;
+}
 .z-10 {
   z-index: 10;
 }
@@ -2245,6 +2251,12 @@ input:checked + .toggle-bg {
 }
 .pl-5 {
   padding-left: 1.25rem;
+}
+.ps-10 {
+  padding-inline-start: 2.5rem;
+}
+.ps-3 {
+  padding-inline-start: 0.75rem;
 }
 .text-left {
   text-align: left;
@@ -3837,8 +3849,16 @@ input:checked + .toggle-bg {
     margin-top: 0px;
   }
 
+  .md\:me-0 {
+    margin-inline-end: 0px;
+  }
+
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:h-screen {
