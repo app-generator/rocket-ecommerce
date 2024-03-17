@@ -3,14 +3,21 @@ from apps.common.models import Product
 from django.forms import ClearableFileInput
 from django.utils.html import format_html
 
+
+
 class ImageWidget(ClearableFileInput):
     def render(self, name, value, attrs=None, renderer=None):
         output = []
         
         if value and hasattr(value, 'url'):
-            output.append('<div><img src="{}" style="max-height:100px;"></div>'.format(value.url))
+            output.append('<div style="display: flex;">')
+            output.append('<div style="display: flex; flex-direction: column; justify-content: center;">')
+            output.append('</div>')
+            output.append('<img src="{}" style="max-height:100px;">'.format(value.url))
+            output.append('</div>')
         
         output.append(super().render(name, value, attrs, renderer))
+        
         return format_html(''.join(output))
 
 class ProductForm(forms.ModelForm):
