@@ -1373,6 +1373,9 @@ input:checked + .toggle-bg {
 .h-24 {
   height: 6rem;
 }
+.h-80 {
+  height: 20rem;
+}
 .max-h-full {
   max-height: 100%;
 }
@@ -4011,6 +4014,10 @@ input:checked + .toggle-bg {
 
   .lg\:w-96 {
     width: 24rem;
+  }
+
+  .lg\:w-4\/5 {
+    width: 80%;
   }
 
   .lg\:grid-cols-12 {
