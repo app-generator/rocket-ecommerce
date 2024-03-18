@@ -40,5 +40,6 @@ urlpatterns = [
     path('order-list/',views.show_order, name = 'order_list'),
 
     path('settings/', views.dashboard_settings, name="dashboard_settings"),
+    path('search/', views.search_page, name="search_page"),
 
 ]
