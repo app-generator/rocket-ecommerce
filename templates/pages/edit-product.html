@@ -25,12 +25,25 @@
                         {% csrf_token %}
                         
                         {% for field in form %}
-                        <div class="mb-5">
-                            <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }} </label>
-                            {{ field }}
-                        
-                        </div>
+                            {% if not 'img' in field.name %}
+                            <div class="mb-5">
+                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }} </label>
+                                {{ field }}
+                            
+                            </div>
+                            {% else %}
+                            <div class="mb-5">
+                                <div class="flex gap-3 mb-3 items-end">
+                                    {% if field.value %}
+                                    <img class="h-24" src="/media/{{ field.value }}" alt="">
+                                    {% endif %}
+                                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+                                </div>
+                                <input type="file" name="{{ field.name }}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="">
+                            </div>
+                            {% endif %}
                         {% endfor %}
+                        
                         
                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                     </form>
