@@ -335,3 +335,16 @@ def show_order(request):
 @login_required(login_url='/admin/')
 def dashboard_settings(request):
    return render(request, 'dashboard/settings.html')
+
+
+def search_page(request):
+  filter_search = {}
+  search = request.GET.get('search')
+  if search:
+    filter_search['name__icontains'] = search
+  
+  products = Product.objects.filter(**filter_search)
+  context = {
+    'products': products
+  }
+  return render(request, 'pages/search-page.html', context)

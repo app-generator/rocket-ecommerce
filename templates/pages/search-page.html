@@ -1,0 +1,22 @@
+{% extends "layouts/base-products.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="max-w-screen-2xl mx-auto px-5 py-44">
+    {% for product in products %}
+    <a href="{% url "product_details" product.id %}" class="flex items-center gap-5 border-b py-5 hover:border-r-8 hover:border-r-lime-700">
+        <img class="block w-24 h-24 object-cover" src="{{ product.img_main.url }}" alt="">
+        <div>
+            <span class="uppercase font-normal flex gap-5">
+                {% for tag in product.tags.all %}
+                    <span>{{ tag.name }}</span>
+                {% endfor %}
+            </span>
+            <h4 class="text-xl uppercase font-medium">{{ product.name }}</h4>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+
+{% endblock content %}
