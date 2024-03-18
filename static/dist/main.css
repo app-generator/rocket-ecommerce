@@ -1055,6 +1055,9 @@ input:checked + .toggle-bg {
 .top-2\.5 {
   top: 0.625rem;
 }
+.end-0 {
+  inset-inline-end: 0px;
+}
 .z-10 {
   z-index: 10;
 }
@@ -2163,6 +2166,9 @@ input:checked + .toggle-bg {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pe-3 {
+  padding-inline-end: 0.75rem;
 }
 .text-left {
   text-align: left;
