@@ -74,6 +74,7 @@
                                                     <tr>
                                                         <th class="px-4 py-2 text-left">User</th>
                                                         <th class="px-4 py-2 text-left">Product</th>
+                                                        <th class="px-4 py-2 text-left">Color</th>
                                                         <th class="px-4 py-2 text-left">Quantity</th>
                                                         <th class="px-4 py-2 text-left">Total Price</th>
                                                     </tr>
@@ -84,12 +85,13 @@
                                                     <tr>
                                                         <td class="px-4 py-2 border text-left">{{ order.user.username }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.product.name }}</td>
+                                                        <td class="px-4 py-2 border text-left">{{ cart.color.name }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.quantity }}</td>
                                                         <td class="px-4 py-2 border text-left">{{ cart.total_price }}</td>
                                                     </tr>
                                                     {% endfor %}
                                                     <tr class="font-bold">
-                                                        <td class="px-4 py-2 border text-left" colspan="3">Total Order</td>
+                                                        <td class="px-4 py-2 border text-left" colspan="4">Total Order</td>
                                                         <td class="px-4 py-2 border text-left">{{ order.total_order }}</td>
                                                     </tr>
                                                 </tbody>
