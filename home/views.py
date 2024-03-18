@@ -4,7 +4,7 @@ from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required , user_passes_test
@@ -127,20 +127,26 @@ def product_details(request, product_id):
 
 @login_required(login_url='/users/signin/')
 def add_to_cart(request, product_id):
-  product = get_object_or_404(Product, pk=product_id)
-  
-  cart, created = Cart.objects.get_or_create(
-    product=product,
-    user=request.user,
-    is_ordered = False,
+    product = get_object_or_404(Product, pk=product_id)
+    color_id = request.POST.get('product_color')  
 
-  )
 
-  if not created:
-    cart.quantity += 1
-    cart.save()
-  
-  return redirect(request.META.get('HTTP_REFERER'))
+    color = get_object_or_404(Color, pk=color_id)  
+
+    print(color,'------------------------------')
+
+    cart, created = Cart.objects.get_or_create(
+        product=product,
+        user=request.user,
+        is_ordered=False,
+        color=color
+    )
+
+    if not created:
+        cart.quantity += 1
+        cart.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url='/users/signin/')
