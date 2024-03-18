@@ -42,4 +42,8 @@ urlpatterns = [
     path('settings/', views.dashboard_settings, name="dashboard_settings"),
     path('search/', views.search_page, name="search_page"),
 
+    path('create-props/<int:product_id>/', views.create_props, name="create_props"),
+    path('update-props/<int:prop_id>/', views.update_props, name="update_props"),
+    path('delete-props/<int:prop_id>/', views.delete_props, name="delete_props"),
+
 ]

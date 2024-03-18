@@ -16,6 +16,7 @@
 
                     
                     <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                        {% if product.product_props.all %}
                         <h2 id="accordion-flush-heading-1">
                             <button type="button" class="flex items-center justify-between w-full py-5 font-normal text-sm text-slate-500 rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
                                 <span>Product Information</span>
@@ -27,50 +28,16 @@
                         <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
                             <div class="py-5 border-b border-gray-200 dark:border-gray-700">
                                 <div class="grid grid-cols-2 gap-3 mb-5">
-                                    <div>
-                                        <h6 class="font-medium text-sm">Material</h6>
-                                        {% if product.material %}<span class="block">{{product.material}}</span>
-                                        {% else %}
-                                        <span class="block">-</span>
-                                        {% endif %}
+                                    {% for prop in product.product_props.all %}
+                                    <div class="mb-4">
+                                        <h6 class="font-medium text-sm mb-2">{{ prop.prop }}</h6>
+                                        <span class="block text-sm">{{prop.value}}</span>
                                     </div>
-                                    <div>
-                                        <h6 class="font-medium text-sm">Weight</h6>
-                                        {% if product.weight %}<span class="block">{{product.weight}}</span>
-                                        {% else %}
-                                        <span class="block">-</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-2 gap-3 mb-5">
-                                    <div>
-                                        <h6 class="font-medium text-sm">Country of origin</h6>
-                                        {% if product.country_of_origin %}<span class="block">{{product.country_of_origin}}</span>
-                                        {% else %}
-                                        <span class="block">-</span>
-                                        {% endif %}
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-sm">Dimensions</h6>
-                                        {% if product.dimensions %}<span class="block">{{product.dimensions}}</span>
-                                        {% else %}
-                                        <span class="block">-</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-2 gap-3 mb-5">
-                                    <div>
-                                        <h6 class="font-medium text-sm">Type</h6>
-                                        {% if product.product_type %}<span class="block">{{product.product_type}}</span>
-                                        {% else %}
-                                        <span class="block">-</span>
-                                        {% endif %}
-                                    </div>
-                                    <div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         <h2 id="accordion-flush-heading-2">
                             <button type="button" class="flex items-center justify-between w-full py-5 font-normal text-sm text-slate-500 rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
                                 <span>Shipping & Returns</span>
