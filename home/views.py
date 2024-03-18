@@ -4,7 +4,7 @@ from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color, ProductProps
 from home.forms import ProductForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required , user_passes_test
@@ -354,3 +354,35 @@ def search_page(request):
     'products': products
   }
   return render(request, 'pages/search-page.html', context)
+
+
+def create_props(request, product_id):
+  product = Product.objects.get(pk=product_id)
+
+  if request.method == "POST":
+    props, created = ProductProps.objects.update_or_create(
+      product=product,
+      prop=request.POST.get('prop'),
+      defaults={
+        'value': request.POST.get('value')
+      }
+    )
+  
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+def update_props(request, prop_id):
+  product_prop = ProductProps.objects.get(pk=prop_id)
+
+  if request.method == "POST":
+    for attribute, value in request.POST.items():
+      setattr(product_prop, attribute, value)
+    
+    product_prop.save()
+  
+  return redirect(request.META.get('HTTP_REFERER'))
+
+def delete_props(request, prop_id):
+  product_prop = ProductProps.objects.get(pk=prop_id)
+  product_prop.delete()
+  return redirect(request.META.get('HTTP_REFERER'))

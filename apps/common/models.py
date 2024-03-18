@@ -106,3 +106,8 @@ class StripeCredentials(BaseModel):
 #     image = models.ImageField(upload_to='product')
 
 
+
+class ProductProps(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_props")
+    prop = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
