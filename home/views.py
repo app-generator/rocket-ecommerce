@@ -4,8 +4,8 @@ from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
-from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color, ProductProps
-from home.forms import ProductForm
+from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color, ProductProps, Settings, TypeChocies
+from home.forms import ProductForm, LegalForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required , user_passes_test
 from django.core.files.base import ContentFile
@@ -113,6 +113,93 @@ def delete_product(request, id):
   product = get_object_or_404(Product, id=id)
   product.delete()
   return redirect(reverse('load_products'))
+
+
+@staff_member_required
+def general_settings(request):
+    if request.method == 'POST':
+        for attribute, value in request.POST.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                   'value': value
+                }
+            )
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+       'parent': 'settings',
+       'segment': 'general_settings'
+    }
+    return render(request, 'pages/settings/general-settings.html', context)
+
+
+@staff_member_required
+@login_required(login_url='/admin/')
+def stripe_settings(request):
+
+    context = {
+       'parent': 'settings',
+       'segment': 'stripe_settings'
+    }
+    return render(request, 'pages/settings/stripe-settings.html', context)
+
+@staff_member_required
+def social_settings(request):
+    if request.method == 'POST':
+        for attribute, value in request.POST.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                   'value': value
+                }
+            )
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    context = {
+       'parent': 'settings',
+       'segment': 'social_settings'
+    }
+    return render(request, 'pages/settings/social-settings.html', context)
+
+
+@staff_member_required
+def legal_settings(request):
+    legal_privacy = Settings.objects.filter(type='legal_privacy').first()
+    legal_terms = Settings.objects.filter(type='legal_terms').first()
+
+    initial_data = {
+        'legal_privacy': legal_privacy.value_html if legal_privacy else '',
+        'legal_terms': legal_terms.value_html if legal_terms else '',
+    }
+    form = LegalForm(initial=initial_data)
+
+    if request.method == 'POST':
+        for attribute, value in request.POST.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                   'value_html': value
+                }
+            )
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+       'form': form,       
+       'parent': 'settings',
+       'segment': 'legal_settings'
+    }
+    return render(request, 'pages/settings/legal-settings.html', context)
+
 
 
 def product_details(request, product_id):
@@ -338,12 +425,6 @@ def show_order(request):
    return render(request,'pages/order-list.html',context)
 
 
-@staff_member_required
-@login_required(login_url='/admin/')
-def dashboard_settings(request):
-   return render(request, 'dashboard/settings.html')
-
-
 def search_page(request):
   filter_search = {}
   search = request.GET.get('search')
@@ -387,3 +468,20 @@ def delete_props(request, prop_id):
   product_prop = ProductProps.objects.get(pk=prop_id)
   product_prop.delete()
   return redirect(request.META.get('HTTP_REFERER'))
+
+
+def privacy_policy(request):
+   legal_privacy = Settings.objects.filter(type='legal_privacy').first().value_html if Settings.objects.filter(type='legal_privacy').exists() else 'Privacy Policy'
+
+   context = {
+      'legal_privacy': legal_privacy
+   }
+   return render(request, 'pages/privacy-policy.html', context)
+
+def terms_condition(request):
+   legal_terms = Settings.objects.filter(type='legal_terms').first().value_html if Settings.objects.filter(type='legal_terms').exists() else 'Terms and Conditions'
+   
+   context = {
+      'legal_terms': legal_terms
+   }
+   return render(request, 'pages/terms-condition.html', context)

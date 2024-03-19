@@ -1,0 +1,12 @@
+{% extends "layouts/base-products.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="max-w-screen-2xl mx-auto px-5 pt-44">
+    <h3 class="text-3xl font-bold dark:text-white mb-3">Privacy Policy</h3>
+
+    {{ legal_privacy.html|safe }}
+</section>
+
+{% endblock content %}

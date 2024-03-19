@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
+from django_quill.fields import QuillField
 
 # Create your models here.
 
@@ -106,3 +107,22 @@ class ProductProps(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_props")
     prop = models.CharField(max_length=255)
     value = models.CharField(max_length=255)
+
+
+
+class TypeChocies(models.TextChoices):
+    site_name = 'site_name', 'Site name'
+    copyright = 'copyright', 'Copyright'
+    stripe_pub_key = 'stripe_pub_key', 'Stripe publishable key'
+    stripe_sec_key = 'stripe_sec_key', 'Stripe secret key'
+    social_twitter = 'social_twitter', 'Social twitter'
+    social_instagram = 'social_instagram', 'Social instagram'
+    social_github = 'social_github', 'Social github'
+    social_facebook = 'social_facebook', 'Social facebook'
+    legal_privacy = 'legal_privacy', 'Legal privacy'
+    legal_terms = 'legal_terms', 'Legal terms'
+
+class Settings(BaseModel):
+    type = models.CharField(max_length=255, choices=TypeChocies.choices, unique=True)
+    value = models.TextField(null=True, blank=True)
+    value_html = QuillField(null=True, blank=True)
