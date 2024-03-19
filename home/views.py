@@ -285,7 +285,7 @@ def category_products(request,name):
 
 
 
-def discounted_product_list(request):
+def discounts(request):
     discounted_products = Product.objects.filter(discount__isnull=False)
     context = {
         'products': discounted_products,

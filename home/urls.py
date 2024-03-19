@@ -30,7 +30,7 @@ urlpatterns = [
     path('category-product/<str:name>/', views.category_products, name='category_products'),
 
     #Discount
-    path('discounted-products/', views.discounted_product_list, name='discounted_product_list'),
+    path('discounts/', views.discounts, name='discounts'),
 
     #homepage
     path('', views.homepage, name='home_page'),
