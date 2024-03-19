@@ -1,17 +1,20 @@
 [
     {
-       "tag": "ui-kit"
+       "tag": "Shoes"
     },
     {
-       "tag": "dashboard"
+       "tag": "Pants"
     },
     {
-       "tag": "admin"
+       "tag": "T-shirts"
     },
     {
-      "tag": "tailwind"
+      "tag": "Hoodies"
    },
    {
-      "tag": "black-design"
+      "tag": "Wallets"
+   },
+   {
+      "tag": "Sunglasses"
    }
  ]
