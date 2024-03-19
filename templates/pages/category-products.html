@@ -12,7 +12,7 @@
 
     <div class="grid bg-gray-100 py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3">
         {% for product in products %}
-        <a href="{% url 'product_details' product.id %}">
+        <a href="{% url 'product_details' product.slug %}">
           <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
               <div class="relative">
                   {% if product.img_main %}

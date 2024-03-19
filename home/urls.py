@@ -9,7 +9,7 @@ urlpatterns = [
     path('create-related-product/<int:stripe_product_id>/', views.create_related_product, name="create_related_product"),
     path('edit-product/<int:product_id>/', views.edit_product, name="edit_product"),
     path('delete-product/<int:id>/', views.delete_product, name="delete_local_product"),
-    path('product/<int:product_id>/', views.product_details, name="product_details"),
+    path('product/<str:slug>/', views.product_details, name="product_details"),
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name="add_to_cart"),
 
     #Cart
@@ -34,7 +34,7 @@ urlpatterns = [
 
     #homepage
     path('', views.homepage, name='home_page'),
-    path('<int:tag_id>/', views.homepage, name='home_page'),
+    path('<str:slug>/', views.homepage, name='home_page'),
     path('transaction/', views.fetch_stripe_transactions, name='transaction'),
 
     #Order
