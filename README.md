@@ -20,7 +20,7 @@
         </a>
         &nbsp; &bull; &nbsp;
         <a href="https://appseed.gumroad.com/l/rocket-ecommerce">
-            Buy $99 🛒
+            Buy $49 (optional)
         </a>
     </h3>    
     <p>
@@ -41,7 +41,7 @@
 
 ## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) 
 
-> 🛒 **Only [$99](https://appseed.gumroad.com/l/rocket-ecommerce)** (secured by GUMROAD) for `unlimited projects`, `lifetime updates` and [Support](https://appseed.us/support/) 
+> 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)** (optional) for `unlimited projects`, `lifetime updates` and [Support](https://appseed.us/support/) 
 
 #### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
