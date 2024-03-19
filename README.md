@@ -63,6 +63,8 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
  - ∞ hrs overthinking...
  - Free [Support](https://appseed.us/support/) via `Email` & [Discord](https://discord.gg/fZC6hup) 
 
+<br />
+
 ## Features 
 
 | Status | Item | info | 
