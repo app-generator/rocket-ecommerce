@@ -21,6 +21,7 @@ django-celery-results==2.5.1
 djangorestframework==3.14.0
 django-api-generator==1.0.17
 drf-spectacular==0.26.5
+django-quill-editor==0.1.40
 
 Pillow==10.0.1
 
