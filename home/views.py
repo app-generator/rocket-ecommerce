@@ -45,7 +45,7 @@ def index(request):
 @staff_member_required
 def load_stripe_products(request):
   stripe.api_key = get_stripe_secret_key(request)
-  stripe_products = stripe.Product.list(expand=['data.default_price'])
+  stripe_products = stripe.Product.list(expand=['data.default_price'], active=True)
   for stripe_product in stripe_products:
     product, created = ProductStripe.objects.update_or_create(
       name=stripe_product['name'],
