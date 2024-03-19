@@ -42,6 +42,7 @@ class Product(BaseModel):
     img_3 = models.ImageField(upload_to='product', null=True, blank=True)
     img_4 = models.ImageField(upload_to='product', null=True, blank=True)
     img_5 = models.ImageField(upload_to='product', null=True, blank=True)
+    url_video = models.URLField(null=True, blank=True)
     short_description = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -49,12 +50,6 @@ class Product(BaseModel):
     featured = models.BooleanField(default=False)
     discount = models.DecimalField(max_digits=5, decimal_places=2, blank=True,null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    material = models.CharField(max_length=100, blank=True, null=True)
-    weight = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    country_of_origin = models.CharField(max_length=100, blank=True, null=True)
-    dimensions = models.CharField(max_length=100, blank=True, null=True)
-    product_type = models.CharField(max_length=50, blank=True, null=True)
-    colors = models.ManyToManyField(Color)
 
     def discounted_price(self):
         return self.price + (self.price * (self.discount / 100))
