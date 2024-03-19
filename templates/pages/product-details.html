@@ -198,7 +198,7 @@
 
             <div class="grid mx-auto max-w-screen-2xl gap-10 lg:grid-cols-4 ">
                 {% for product in related_products %}
-                <a class="group" href="{% url 'product_details' product.id %}">
+                <a class="group" href="{% url 'product_details' product.slug %}">
                     <div class="max-w-full mx-auto bg-white rounded-lg overflow-hidden border border-gray-200" style="height: 570px;">
                         {% if product.img_main %}
                             <img class="rounded-t-lg h-full object-cover" src="{{ product.img_main.url }}" alt="product image" />

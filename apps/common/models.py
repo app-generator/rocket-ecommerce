@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
 from django_quill.fields import QuillField
+from autoslug import AutoSlugField
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class BaseModel(models.Model):
 
 class Tag(BaseModel):
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name', unique=True)
 
     def __str__(self):
         return self.name
@@ -37,6 +39,7 @@ class Color(BaseModel):
 class Product(BaseModel):
     product_stripe = models.OneToOneField(ProductStripe, on_delete=models.CASCADE, related_name="product")
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name', unique=True)
     img_main = models.ImageField(upload_to='product', null=True, blank=True)
     img_1 = models.ImageField(upload_to='product', null=True, blank=True)
     img_2 = models.ImageField(upload_to='product', null=True, blank=True)

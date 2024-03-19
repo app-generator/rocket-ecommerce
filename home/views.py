@@ -202,8 +202,8 @@ def legal_settings(request):
 
 
 
-def product_details(request, product_id):
-  product = get_object_or_404(Product, pk=product_id)
+def product_details(request, slug):
+  product = get_object_or_404(Product, slug=slug)
 
   context = {
     'product': product,
@@ -382,10 +382,11 @@ def discounts(request):
 
 
 
-def homepage(request, tag_id=None):
+def homepage(request, slug=None):
     filter_string = {}
-    if tag_id:
-       filter_string['tags__in'] = [tag_id]
+    if slug:
+       tag = Tag.objects.get(slug=slug)
+       filter_string['tags__in'] = [tag.pk]
     
     products = Product.objects.filter(**filter_string)
     context = {
