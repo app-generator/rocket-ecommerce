@@ -1,10 +1,10 @@
 <div align="center">
-    <a href="https://rocket-ecommerce.onrender.com">
+    <a href="https://github.com/app-generator/rocket-ecommerce">
         <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272178364-cbac6d97-b2dc-4d95-bab6-891f4ee7d84d.png"" width="64" height="64" alt="Rocket Icon">
     </a>
     <h1>
-        <a href="https://rocket-ecommerce.onrender.com">
-            Rocket eCommerce
+        <a href="https://github.com/app-generator/rocket-ecommerce">
+            Rocket eCommerce - Open-Source
         </a>
     </h1>
     <p>
@@ -26,7 +26,7 @@
     <p>
         <strong>Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like Images, Tags, Discount, .. etc.</strong>
         <br /> <br />
-        The product comes with Docker and CI/CD Support.  
+        The product comes with Docker and CI/CD Support
     </p>  
     <hr />
 </div>
@@ -41,15 +41,22 @@
 
 ## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) 
 
-> 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)** (optional) for `unlimited projects`, `lifetime updates` and [Support](https://appseed.us/support/) 
+> 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)**, optional but `highly appreciated`
+
+<br />
 
 #### ***Supercharge your eCommerce App instantly, launch faster, make $***
 
-Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. **Rocket eCommerce** provides you with the boilerplate code you need to launch, FAST. 
+Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. 
+**Rocket eCommerce** provides you with the boilerplate code you need to launch, FAST. 
+
+<br />
 
 #### ***Rocket your startup in days, not weeks*** 
 
 The Django boilerplate has all you need to build your SaaS, Analytics tool, or any other type of Web App. From idea to production in 5 minutes.
+
+<br />
 
 #### **48+ hours of headaches**
 
@@ -78,22 +85,22 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 | ✅ | Transactions Tracking | YES |
 | ✅ | Docker | YES |
 | ✅ | CI/CD | Render |
-| -   | - | - |
+| ✅  | Active versioning and [support](https://appseed.us/support/) | [AppSeed](https://appseed.us/) |
 
 <br />
 
 ## Manual Build 
 
-> 👉 Download code - Requires a [purchase](https://appseed.gumroad.com/l/rocket-ecommerce) (secured by GUMROAD)
+> 👉 Download code (public access)
 
 ```bash
-$ unzip rocket-ecommerce.zip
+$ git clone https://github.com/app-generator/rocket-ecommerce.git
 $ cd rocket-ecommerce
 ```
 
 > 👉 Create `.env` from `env.sample`
 
-The most important, are the `Stripe Keys`: **STRIPE_SECRET_KEY**, **STRIPE_PUBLISHABLE_KEY**
+The most important, are the `Stripe Keys` **STRIPE_SECRET_KEY**, **STRIPE_PUBLISHABLE_KEY** that will connect your `Stripe` account with the APP.
 
 ```env
 DEBUG=True
@@ -111,7 +118,6 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER=
 EMAIL_HOST_PASSWORD=
 ```
-
 
 > 👉 Install **Django** modules via `VENV`  
 
@@ -146,10 +152,10 @@ $ python manage.py runserver       # start the project
 
 ## Start With Docker
 
-> 👉 Download code - Requires a [purchase](https://appseed.gumroad.com/l/rocket-ecommerce) (secured by GUMROAD)
+> 👉 Download code (public access)
 
 ```bash
-$ unzip rocket-ecommerce.zip
+$ git clone https://github.com/app-generator/rocket-ecommerce.git
 $ cd rocket-ecommerce
 ```
 
@@ -163,7 +169,7 @@ Visit the app in the browser `localhost:5085`.
 
 <br />
 
-## Use MySql 
+## Use `MySql`
 
 By default, the starter uses SQLite for persistence. In order to use MySql, here are the steps: 
 
@@ -196,18 +202,19 @@ $ python manage.py migrate
 
 ## Production Build
 
+> For issues, contact [support](https://appseed.us/support/) (eMail & Discord)
+
 To use the starter in production mode, here are the steps: 
 
 - Set  **DEBUG=False** in `.env`
 - Execute `collectstatic` command
   - `$ python manage.py collectstatic --no-input`
 
-As a model, feel free to take a look at [build.sh](./build.sh), the file executed by the CI/CD flow for Render:   
-
+As a model, feel free to take a look at [build.sh](./build.sh), the file executed by the CI/CD flow for Render.
 
 <br />
 
-## **Deploy on Render**
+## **Deploy on [[Render](https://render.com/)**
 
 - Create a Blueprint instance
   - Go to https://dashboard.render.com/blueprints this link.
@@ -269,9 +276,9 @@ At this point, the product should be LIVE.
 
 ## License
 
-[EULA](https://github.com/app-generator/license-eula)
+**MIT** (total freedom, you can multiply, sell, resell, and update the code)
 
 <br />
 
 ---
-Rocket eCommerce - Django eCommerce starter styled with `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
+[Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - `Open-Source eCommerce` starter powered by **Django** and `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
