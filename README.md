@@ -43,6 +43,8 @@
 
 > 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)**, optional but `highly appreciated`
 
+<br />
+
 #### 👉 ***Supercharge your eCommerce App instantly, launch faster, make $***
 
 Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. 
