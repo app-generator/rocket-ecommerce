@@ -385,6 +385,10 @@ def discounts(request):
 def homepage(request, slug=None):
     filter_string = {}
     if slug:
+       
+       if 'search' == slug:
+        return search_page(request)
+       
        tag = Tag.objects.get(slug=slug)
        filter_string['tags__in'] = [tag.pk]
     
