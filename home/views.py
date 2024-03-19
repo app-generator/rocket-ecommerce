@@ -128,18 +128,15 @@ def product_details(request, product_id):
 @login_required(login_url='/users/signin/')
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    color_id = request.POST.get('product_color')  
-
-
-    color = get_object_or_404(Color, pk=color_id)  
-
-    print(color,'------------------------------')
+    
+    # color_id = request.POST.get('product_color')  
+    # color = get_object_or_404(Color, pk=color_id)  
+    # print(color,'------------------------------')
 
     cart, created = Cart.objects.get_or_create(
         product=product,
         user=request.user,
-        is_ordered=False,
-        color=color
+        is_ordered=False
     )
 
     if not created:
@@ -298,8 +295,12 @@ def discounted_product_list(request):
 
 
 
-def homepage(request):
-    products = Product.objects.all()
+def homepage(request, tag_id=None):
+    filter_string = {}
+    if tag_id:
+       filter_string['tags__in'] = [tag_id]
+    
+    products = Product.objects.filter(**filter_string)
     context = {
        'products':products
     }

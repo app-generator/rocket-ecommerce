@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="lg:w-1/4 w-full pl-5 mt-28">
-                    {% if product.colors %}
+                    {% comment %} {% if product.colors %}
                     <h5 class="mb-5">Select color</h5>
                     
                    
@@ -163,7 +163,7 @@
                         <ul class="grid gap-3 md:grid-cols-2 mb-5">
                             {% for color in product.colors.all %}
                             <li>
-                                <input type="radio" id='color-{{color.id}}' name='product_color' value="{{color.id}}" class="hidden peer" required="">
+                                <input type="radio" id='color-{{color.id}}' name='product_color' value="{{color.id}}" class="hidden peer">
                                 <label for='color-{{color.id}}' class="inline-flex items-center justify-center py-3 w-full text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
                                     <div class="block">
                                         <div class="w-full text-xs font-normal">{{color.name}}</div>
@@ -176,14 +176,14 @@
                   
                     
                     
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                     <hr class=" mb-3">
                     <h3 class="text-2xl font-bold text-black mb-3">€{{ product.price }}</h3>
 
-                    <button  class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                    <a href="{% url 'add_to_cart' product.id %}"  class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center justify-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2">
                         Add to cart
-                    </button>
-                </form>
+                    </a>
+                {% comment %} </form> {% endcomment %}
                 </div>
             </div>
         </div>
