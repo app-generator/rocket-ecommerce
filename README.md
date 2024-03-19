@@ -43,22 +43,16 @@
 
 > 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)**, optional but `highly appreciated`
 
-<br />
-
-#### ✅ ***Supercharge your eCommerce App instantly, launch faster, make $***
+#### 👉 ***Supercharge your eCommerce App instantly, launch faster, make $***
 
 Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. 
 **Rocket eCommerce** provides you with the boilerplate code you need to launch, FAST. 
 
-<br />
-
-#### ✅ ***Rocket your startup in days, not weeks*** 
+#### 👉 ***Rocket your startup in days, not weeks*** 
 
 The Django boilerplate has all you need to build your SaaS, Analytics tool, or any other type of Web App. From idea to production in 5 minutes.
 
-<br />
-
-#### ✅ **48+ hours of headaches**
+#### 👉 **48+ hours of headaches**
 
  - 1 hrs to set up the project 
  - 2 hrs integrate tooling
@@ -66,8 +60,6 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
  - 1 hrs for Docker
  - ∞ hrs overthinking...
  - Free [Support](https://appseed.us/support/) via `Email` & [Discord](https://discord.gg/fZC6hup) 
-
-<br />
 
 ## Features 
 
