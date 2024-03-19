@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.0.4] 2024-03-19
+### Changes
+
+- Change REPO Visibility to `public`
+- Change Routing for categs & products
+- Settings
+  - Site name & Copyright 
+  - Stripe Keys 
+  - Social Links
+  - Terms & Condition Page
+  - Privacy Policy 
+
 ## [0.0.3] 2024-03-13
 ### Changes
 

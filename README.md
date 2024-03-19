@@ -93,25 +93,23 @@ $ cd rocket-ecommerce
 
 > 👉 Create `.env` from `env.sample`
 
+The most important, are the `Stripe Keys`: **STRIPE_SECRET_KEY**, **STRIPE_PUBLISHABLE_KEY**
+
 ```env
-DEBUG=False
+DEBUG=True
 
 SECRET_KEY=<STRONG_KEY_HERE>
 
-# For Myql or PgSQL Persistence 
-# DB_ENGINE=mysql
-# DB_HOST=localhost
-# DB_NAME=appseed_rocket_django
-# DB_USERNAME=root
-# DB_PASS=
-# DB_PORT=3306
+DEMO_MODE=True
 
-# SMTP configaration
-# EMAIL_HOST=smtp.gmail.com
-# EMAIL_PORT=587
-# EMAIL_USE_TLS=True
-# EMAIL_HOST_USER=
-# EMAIL_HOST_PASSWORD=
+STRIPE_SECRET_KEY=<YOUR_KEY_HERE>
+STRIPE_PUBLISHABLE_KEY=<YOUR_KEY_HERE>
+
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
 ```
 
 
