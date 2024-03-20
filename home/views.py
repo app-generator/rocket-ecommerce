@@ -406,6 +406,10 @@ def fetch_stripe_transactions(request):
     stripe.api_key = get_stripe_secret_key(request)
     charges = stripe.Charge.list()
     for charge in charges:
+        if charge.customer:
+          customer = stripe.Customer.retrieve(charge.customer)
+          charge['customer_name'] = customer.name
+          
         charge.amount = charge.amount / 100
 
     context = {
