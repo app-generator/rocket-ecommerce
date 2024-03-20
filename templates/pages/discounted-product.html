@@ -3,52 +3,39 @@
 {% extends "layouts/base-products.html" %}
 
 {% block content %}
-<section class="h-screen bg-gray-100 pt-20">
-    <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-3">
 
-        {% for product in products %}
-        <a href="{% url 'product_details' product.slug %}">
-        <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden">
-            <div class="relative">
-                {% if product.img_main %}
-                <img class="rounded-t-lg hover:scale-110 transition duration-300" src="{{ product.img_main.url }}" alt="product image" />
 
-            {% endif %}
-              <div class="absolute top-2 right-2">
-                {% if product.discount %}
-                <div class="bg-red-400 text-white rounded-md py-1 px-2">
-                    
-                  <span class="text-xl">-{{ product.discount|floatformat:"0" }}%</span>
-                  
-                </div>
-                {% endif %}
-              </div>
-            </div>
-            <div class="p-4">
-              <h2 class="text-xl font-medium text-gray-800">{{ product.name }}</h2>
-              <div class="flex flex-col mt-4">
-                {% if product.discount %}
-                
-                <div class="flex gap-2 items-center justify-start">
-                    <span class="text-gray-800 font-medium line-through">${{product.discounted_price|floatformat:2}}</span>
-                    <span class="text-gray-800 font-medium text-xl">${{product.price}}</span>
-                    <span class="text-red-700 font-medium bg-red-100 rounded px-2 py-1 text-center">{{product.discount}}%</span>
+<section class="bg-white pt-44 md:pt-16 mb-10 md:mb-16 pb-10 md:pb-40 border-b border-gray-200">
+  <div class="md:mt-28 mt-10">
+      <div class="grid mx-auto max-w-screen-2xl gap-14 lg:grid-cols-3 px-5" id='scrollTarget'>
+          {% for product in products %}
+          <a class="group" href="{% url 'product_details' product.slug %}">
+              <div class="max-w-full mx-auto bg-white rounded-lg overflow-hidden border border-gray-200 md:h-[570px] relative">
+                  {% if product.img_main %}
+                      <img class="rounded-t-lg h-full object-cover" src="{{ product.img_main.url }}" alt="product image" />
+                  {% endif %}
+                  <div class="absolute top-2 right-2">
+                    {% if product.discount %}
+                    <div class="bg-red-400 text-white rounded-md py-1 px-2">
+                        
+                      <span class="text-xl">-{{ product.discount|floatformat:"0" }}%</span>
+                      
+                    </div>
+                    {% endif %}
                   </div>
-                  {% else %}
-                  <span class="text-gray-800 font-medium text-xl">${{product.price|floatformat:2}}</span>
-                {% endif %}
-                  
               </div>
-            </div>
-          </div>
-        </a>
-        {% endfor %}
-    
-    </div>
-
-    
+              <div class="flex justify-between mt-5">
+                  <span class="block text-sm text-slate-700">{{ product.name }}</span>
+                  <div class="flex gap-3">
+                    <span class="block text-sm text-slate-500">€{{ product.price }}</span>
+                    <span class="block text-sm text-slate-500 line-through">€{{ product.discounted_price }}</span>
+                  </div>
+              </div>
+          </a>
+          {% endfor %}
+      </div>
+  </div>
 </section>  
-
 
 
 {% endblock %}

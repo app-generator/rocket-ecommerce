@@ -5,9 +5,9 @@
 
     <!-- component -->
     <section class="text-gray-700 body-font overflow-hidden bg-white">
-        <div class="px-5 mx-auto py-44">
-            <div class="max-w-screen-2xl p-5 mx-auto flex flex-wrap">
-                <div class="lg:w-1/4 pr-10 mt-28">
+        <div class="px-5 mx-auto pt-44 md:pb-44 pb-10">
+            <div class="max-w-screen-2xl p-0 md:p-5 mx-auto flex flex-wrap">
+                <div class="w-full md:w-1/4 pr-0 md:pr-10 mt-10 md:mt-28 mb-10 md:mb-0">
                     <h2 class="text-sm title-font text-gray-500 tracking-widest mb-5">
                         {% for tag in product.tags.all %} <span class="py-2 text-slate-500">{{ tag.name|title }}</span> {% endfor %}
                     </h2>
@@ -75,44 +75,46 @@
                     </div>
                 </div>
 
-                <div class="lg:w-1/2 px-10">
+                <div class="w-full md:w-1/2 px-0 md:px-10">
                     <div class="slide-wrapper">
                         <div class="swiper bannerSliderLarge" data-aos="zoom-in" data-aos-delay="100">
                            <div class="swiper-wrapper">
                                {% if product.img_main %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_main.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_main.url }}">
                                 </div>
                                 {% endif %}
                                 {% if product.img_1 %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_1.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_1.url }}">
                                 </div>
                                 {% endif %}
                                 {% if product.img_2 %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_2.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_2.url }}">
                                 </div>
                                 {% endif %}
                                 {% if product.img_3 %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_3.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_3.url }}">
                                 </div>
                                 {% endif %}
                                 {% if product.img_4 %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_4.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_4.url }}">
                                 </div>
                                 {% endif %}
                                 {% if product.img_5 %}
                                 <div class="swiper-slide">
-                                    <img alt="ecommerce" style="height: 770px;" class="w-full mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_5.url }}">
+                                    <img alt="ecommerce" class="w-full md:h-[700px] mb-5 object-cover object-center rounded border border-gray-200" src="{{ product.img_5.url }}">
                                 </div>
                                 {% endif %}
                            </div>
-                           <div class="swiper-button-prev"></div>
-                           <div class="separator"></div>
-                           <div class="swiper-button-next"></div>
+                           <div class="hidden md:block">
+                                <div class="swiper-button-prev"></div>
+                                <div class="separator"></div>
+                                <div class="swiper-button-next"></div>
+                           </div>
                          </div>
                          <div thumbsSlider="" class="swiper bannerThumbSlider">
                             <div class="swiper-wrapper justify-center">
@@ -152,7 +154,7 @@
 
                 </div>
 
-                <div class="lg:w-1/4 w-full pl-5 mt-28">
+                <div class="w-full md:w-1/4 pl-0 md:pl-5 mt-10 md:mt-28">
                     {% comment %} {% if product.colors %}
                     <h5 class="mb-5">Select color</h5>
                     
@@ -189,9 +191,9 @@
         </div>
     </section>
 
-    <section class="pb-40 border-b border-gray-200">
+    <section class="pb-10 md:pb-40 border-b border-gray-200">
         <div class="max-w-screen-2xl p-5 mx-auto">
-            <div class="w-2/5 mx-auto mb-28">
+            <div class="w-full md:w-2/5 mx-auto mb-0 md:mb-28">
                 <span class="text-center block mb-5 text-slate-600">Related products</span>
                 <h3 class="text-center text-3xl font-medium">You might also want to check out these products.</h3>
             </div>
