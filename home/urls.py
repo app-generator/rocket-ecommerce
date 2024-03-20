@@ -34,7 +34,7 @@ urlpatterns = [
 
     #homepage
     path('', views.homepage, name='home_page'),
-    path('<str:slug>/', views.homepage, name='home_page'),
+    path('tag/<str:slug>/', views.homepage, name='home_page'),
     path('transaction/', views.fetch_stripe_transactions, name='transaction'),
 
     #Order
