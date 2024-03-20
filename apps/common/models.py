@@ -56,7 +56,7 @@ class Product(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def discounted_price(self):
-        return self.price + (self.price * (self.discount / 100))
+        return round(self.price + (self.price * (self.discount / 100)), 2)
 
     def __str__(self):
         return self.name
