@@ -277,4 +277,4 @@ At this point, the product should be LIVE.
 <br />
 
 ---
-[Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - `Open-Source eCommerce` starter powered by **Django** and `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
+[Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - `Open-Source eCommerce` starter powered by **Django** and `Tailwind/Flowbite`.
