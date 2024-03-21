@@ -140,7 +140,20 @@ def general_settings(request):
                    'value': value
                 }
             )
+
+        for attribute, value in request.FILES.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                   'file': value
+                }
+            )
+
         return redirect(request.META.get('HTTP_REFERER'))
+    
 
     context = {
        'parent': 'settings',
