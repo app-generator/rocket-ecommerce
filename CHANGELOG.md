@@ -4,14 +4,14 @@
 ### Changes
 
 - Stable Version
-- Search
+- [Search](https://rocket-ecommerce.onrender.com/search/)
 - Tags
 - Dynamic Data
   - Site Name
   - Copyright
   - Tags [ via seeder ]
   - HomePage VIDEO
-- Discounts
+- [Discounts](https://rocket-ecommerce.onrender.com/discounts/)
 - and much more ...
 
 ## [0.0.6] 2024-03-20
