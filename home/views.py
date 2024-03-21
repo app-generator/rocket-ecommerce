@@ -5,10 +5,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color, ProductProps, Settings, TypeChocies
-from home.forms import ProductForm, LegalForm
+from home.forms import ProductForm, PrivacyPolicyForm, TermsForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required , user_passes_test
 from django.core.files.base import ContentFile
+from django.contrib import messages
 from django.core.files import File
 from .models import *
 
@@ -109,10 +110,21 @@ def edit_product(request, product_id):
   return render(request, 'pages/edit-product.html', context)
 
 @staff_member_required
-def delete_product(request, id):
-  product = get_object_or_404(Product, id=id)
-  product.delete()
-  return redirect(reverse('load_products'))
+def delete_local_product(request, id):
+    product = get_object_or_404(Product, id=id)
+    product.delete()
+    return redirect(reverse('load_products'))
+
+
+@staff_member_required
+def delete_both_product(request, local_product, stripe_product):
+    local_product = get_object_or_404(Product, id=local_product)
+    stripe_product = get_object_or_404(ProductStripe, id=stripe_product)
+    if local_product:
+        local_product.delete()
+    if stripe_product:
+        stripe_product.delete()
+    return redirect(reverse('load_products'))
 
 
 @staff_member_required
@@ -170,15 +182,12 @@ def social_settings(request):
 
 
 @staff_member_required
-def legal_settings(request):
+def privacy_settings(request):
     legal_privacy = Settings.objects.filter(type='legal_privacy').first()
-    legal_terms = Settings.objects.filter(type='legal_terms').first()
-
     initial_data = {
         'legal_privacy': legal_privacy.value_html if legal_privacy else '',
-        'legal_terms': legal_terms.value_html if legal_terms else '',
     }
-    form = LegalForm(initial=initial_data)
+    form = PrivacyPolicyForm(initial=initial_data)
 
     if request.method == 'POST':
         for attribute, value in request.POST.items():
@@ -196,9 +205,37 @@ def legal_settings(request):
     context = {
        'form': form,       
        'parent': 'settings',
-       'segment': 'legal_settings'
+       'segment': 'privacy_settings'
     }
-    return render(request, 'pages/settings/legal-settings.html', context)
+    return render(request, 'pages/settings/privacy-settings.html', context)
+
+@staff_member_required
+def terms_settings(request):
+    legal_terms = Settings.objects.filter(type='legal_terms').first()
+    initial_data = {
+        'legal_terms': legal_terms.value_html if legal_terms else '',
+    }
+    form = TermsForm(initial=initial_data)
+
+    if request.method == 'POST':
+        for attribute, value in request.POST.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                   'value_html': value
+                }
+            )
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+       'form': form,       
+       'parent': 'settings',
+       'segment': 'terms_settings'
+    }
+    return render(request, 'pages/settings/terms-settings.html', context)
 
 
 
@@ -316,7 +353,8 @@ def add_stripe_credentials(request):
       )
     return redirect(request.META.get('HTTP_REFERER'))
   else:
-    return HttpResponse('DEMO Mode: Operation not allowed', status=405)
+    messages.warning(request, 'DEMO Mode: Operation not allowed')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url='/users/signin/')

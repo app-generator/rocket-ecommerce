@@ -1,6 +1,7 @@
 <!-- discounted_product_list.html -->
 
 {% extends "layouts/base-products.html" %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -36,17 +37,18 @@
 
 
 <section class="bg-white dark:bg-gray-900 border-b border-gray-200">
-    <div class="max-w-screen-2xl px-4 pt-80 md:pb-80 pb-32 mx-auto">
+    <div class="md:pt-[147px] pt-[190px] mx-auto">
         <div class="">
-            <h1 class="text-center text-3xl">
-                Ecommerce Starter Template
-            </h1>
+            <video class="w-full" autoplay muted loop>
+                <source src="{% static "dist/hero/hero-video-1.mp4" %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 </section>
 
-<section class="bg-white pt-0 md:pt-10 mb-10 md:mb-16 pb-10 md:pb-40 border-b border-gray-200">
-    <div class="md:mt-28 mt-10">
+<section class="bg-white pt-0 md:pt-10 mb-10 md:mb-16 pb-10 md:pb-16 border-b border-gray-200">
+    <div class="mt-10">
         <div class="flex justify-between max-w-screen-2xl mx-auto px-5 mb-10">
             <span class="block text-lg">Latest Drops</span>
             <a class="flex text-blue-600 text-sm" href="#">

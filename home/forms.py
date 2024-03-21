@@ -45,6 +45,8 @@ class ProductForm(forms.ModelForm):
             self.fields['price'].widget.attrs['readonly'] = True
 
 
-class LegalForm(forms.Form):
+class PrivacyPolicyForm(forms.Form):
     legal_privacy = QuillFormField()
+
+class TermsForm(forms.Form):
     legal_terms = QuillFormField()
