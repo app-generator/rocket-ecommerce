@@ -133,24 +133,26 @@ def general_settings(request):
         for attribute, value in request.POST.items():
             if attribute == 'csrfmiddlewaretoken':
                 continue
-
-            Settings.objects.update_or_create(
-                type=TypeChocies[attribute],
-                defaults={
-                   'value': value
-                }
-            )
+            
+            if value:
+                Settings.objects.update_or_create(
+                    type=TypeChocies[attribute],
+                    defaults={
+                    'value': value
+                    }
+                )
 
         for attribute, value in request.FILES.items():
             if attribute == 'csrfmiddlewaretoken':
                 continue
-
-            Settings.objects.update_or_create(
-                type=TypeChocies[attribute],
-                defaults={
-                   'file': value
-                }
-            )
+            
+            if value:
+                Settings.objects.update_or_create(
+                    type=TypeChocies[attribute],
+                    defaults={
+                    'file': value
+                    }
+                )
 
         return redirect(request.META.get('HTTP_REFERER'))
     
@@ -178,13 +180,14 @@ def social_settings(request):
         for attribute, value in request.POST.items():
             if attribute == 'csrfmiddlewaretoken':
                 continue
-
-            Settings.objects.update_or_create(
-                type=TypeChocies[attribute],
-                defaults={
-                   'value': value
-                }
-            )
+            
+            if value:
+                Settings.objects.update_or_create(
+                    type=TypeChocies[attribute],
+                    defaults={
+                    'value': value
+                    }
+                )
         return redirect(request.META.get('HTTP_REFERER'))
     
     context = {
@@ -206,13 +209,14 @@ def privacy_settings(request):
         for attribute, value in request.POST.items():
             if attribute == 'csrfmiddlewaretoken':
                 continue
-
-            Settings.objects.update_or_create(
-                type=TypeChocies[attribute],
-                defaults={
-                   'value_html': value
-                }
-            )
+            
+            if value:
+                Settings.objects.update_or_create(
+                    type=TypeChocies[attribute],
+                    defaults={
+                    'value_html': value
+                    }
+                )
         return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
@@ -234,13 +238,14 @@ def terms_settings(request):
         for attribute, value in request.POST.items():
             if attribute == 'csrfmiddlewaretoken':
                 continue
-
-            Settings.objects.update_or_create(
-                type=TypeChocies[attribute],
-                defaults={
-                   'value_html': value
-                }
-            )
+            
+            if value:
+                Settings.objects.update_or_create(
+                    type=TypeChocies[attribute],
+                    defaults={
+                    'value_html': value
+                    }
+                )
         return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
