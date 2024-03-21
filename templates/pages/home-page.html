@@ -36,18 +36,27 @@
 </style>
 
 
+{% if request.path == '/' %}
 <section class="bg-white dark:bg-gray-900 border-b border-gray-200">
     <div class="md:pt-[147px] pt-[190px] mx-auto">
         <div class="">
-            <video class="w-full" autoplay muted loop>
-                <source src="{% static "dist/hero/hero-video-1.mp4" %}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            {% if hero_video %}
+                <video class="w-full" autoplay muted loop>
+                    <source src="{{ hero_video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <video class="w-full" autoplay muted loop>
+                    <source src="{% static "dist/hero/hero-video-1.mp4" %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
         </div>
     </div>
 </section>
+{% endif %}
 
-<section class="bg-white pt-0 md:pt-10 mb-10 md:mb-16 pb-10 md:pb-16 border-b border-gray-200">
+<section class="bg-white pt-0 {% if not request.path == '/' %} md:pt-44 {% else %} md:pt-10 {% endif %} md:pt-10 mb-10 md:mb-16 pb-10 md:pb-16 border-b border-gray-200">
     <div class="mt-10">
         <div class="flex justify-between max-w-screen-2xl mx-auto px-5 mb-10">
             <span class="block text-lg">Latest Drops</span>

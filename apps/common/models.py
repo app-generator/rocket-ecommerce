@@ -124,8 +124,10 @@ class TypeChocies(models.TextChoices):
     social_facebook = 'social_facebook', 'Social facebook'
     legal_privacy = 'legal_privacy', 'Legal privacy'
     legal_terms = 'legal_terms', 'Legal terms'
+    hero_video = 'hero_video', 'Hero video'
 
 class Settings(BaseModel):
     type = models.CharField(max_length=255, choices=TypeChocies.choices, unique=True)
     value = models.TextField(null=True, blank=True)
     value_html = QuillField(null=True, blank=True)
+    file = models.FileField(upload_to='hero/', null=True, blank=True)
