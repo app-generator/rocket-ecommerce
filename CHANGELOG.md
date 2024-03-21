@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.1] 2024-03-21
+### Changes
+
+- Update DOCS (readme)
+
 ## [1.0.0] 2024-03-21
 ### Changes
 
