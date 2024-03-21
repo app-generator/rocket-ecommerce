@@ -4,7 +4,7 @@
     </a>
     <h1>
         <a href="https://github.com/app-generator/rocket-ecommerce">
-            Rocket eCommerce - Open-Source
+            Rocket eCommerce
         </a>
     </h1>
     <p>
