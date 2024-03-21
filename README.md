@@ -137,6 +137,12 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
+> 👉 Seed DB
+
+```bash
+$ python manage.py seed_tags
+```
+
 > 👉 `Create Superuser` & Start the APP
 
 ```bash

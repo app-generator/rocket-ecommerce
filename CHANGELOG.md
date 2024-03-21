@@ -1,5 +1,19 @@
 # Change Log
 
+## [1.0.0] 2024-03-21
+### Changes
+
+- Stable Version
+- Search
+- Tags
+- Dynamic Data
+  - Site Name
+  - Copyright
+  - Tags [ via seeder ]
+  - HomePage VIDEO
+- Discounts
+- and much more ...
+
 ## [0.0.6] 2024-03-20
 ### Changes
 
