@@ -11,15 +11,15 @@
         <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong> &bull; <strong>Lifetime Updates</strong> &bull; <strong>Unlimited Projects</strong>
     </p>  
     <h3>
-        <a href="https://github.com/app-generator/rocket-ecommerce">
-           📖 Docs
+        <a target="_blank" href="https://appseed.us/support/">
+           Support
         </a>
         &nbsp; &bull; &nbsp; 
-        <a href="https://rocket-ecommerce.onrender.com">
+        <a target="_blank" href="https://rocket-ecommerce.onrender.com">
             DEMO
         </a>
         &nbsp; &bull; &nbsp;
-        <a href="https://appseed.gumroad.com/l/rocket-ecommerce">
+        <a target="_blank" href="https://appseed.gumroad.com/l/rocket-ecommerce">
             Buy $49 (optional)
         </a>
     </h3>    
