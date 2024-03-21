@@ -2139,6 +2139,9 @@ input:checked + .toggle-bg {
 .pt-52 {
   padding-top: 13rem;
 }
+.pt-56 {
+  padding-top: 14rem;
+}
 .pt-6 {
   padding-top: 1.5rem;
 }
@@ -3803,10 +3806,6 @@ input:checked + .toggle-bg {
 
   .md\:pt-\[147px\] {
     padding-top: 147px;
-  }
-
-  .md\:pt-40 {
-    padding-top: 10rem;
   }
 
   .md\:text-5xl {
