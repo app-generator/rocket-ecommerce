@@ -565,6 +565,7 @@ def edit_image(request, product_id, img_name):
         image_file = ContentFile(image_data, name=f'{img_name}.png')
         setattr(product, img_name, image_file)
         product.save()
+        return redirect(reverse('edit_product', kwargs={'product_id': product_id}))
 
     context = {
        'image_path': getattr(product, img_name),

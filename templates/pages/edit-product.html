@@ -17,7 +17,10 @@
             
             <div id="tab-contents">
                 <div id="first" class="p-4">
-                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white mt-3">Product Edit</h1>
+                    <div class="flex gap-3 items-center">
+                        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white mt-3">Product Edit</h1>
+                        <a href="{% url "product_details" product.slug %}" target="_blank" class="text-xl font-semibold text-red-900 dark:text-red-600 mt-3">- View page</a>
+                    </div>
                     <section class="bg-white dark:bg-gray-900 mb-5 mt-5 p-5">
                         <form method='post' class="max-w-2xl mx-auto" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -31,14 +34,16 @@
                                 </div>
                                 {% else %}
                                 <div class="mb-5">
-                                    <div class="flex gap-3 mb-3 items-end">
+                                    <div class="flex gap-3 mb-3">
                                         {% if field.value %}
-                                        <div>
-                                            <a class="text-blue-500" href="{% url "edit_image" product_id=product.id img_name=field.name %}">Edit</a>
-                                            <img class="h-24" src="/media/{{ field.value }}" alt="">
-                                        </div>
+                                        <img class="h-24" src="/media/{{ field.value }}" alt="">
                                         {% endif %}
-                                        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+                                        <div class="flex justify-between flex-col">
+                                            <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-900 dark:text-white">{{ field.label }}</label>
+                                            {% if field.value %}
+                                            <a class="text-blue-500" href="{% url "edit_image" product_id=product.id img_name=field.name %}">Edit</a>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <input type="file" name="{{ field.name }}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="">
                                 </div>
