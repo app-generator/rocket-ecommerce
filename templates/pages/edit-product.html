@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-{% load static %}
+{% load static file_extension %}
 
 {% block content %}
 
@@ -33,7 +33,10 @@
                                 <div class="mb-5">
                                     <div class="flex gap-3 mb-3 items-end">
                                         {% if field.value %}
-                                        <img class="h-24" src="/media/{{ field.value }}" alt="">
+                                        <div>
+                                            <a class="text-blue-500" href="{% url "edit_image" product_id=product.id img_name=field.name %}">Edit</a>
+                                            <img class="h-24" src="/media/{{ field.value }}" alt="">
+                                        </div>
                                         {% endif %}
                                         <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
                                     </div>

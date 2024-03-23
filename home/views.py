@@ -1,5 +1,6 @@
 import stripe
 import requests
+import base64
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponseForbidden, HttpResponse
@@ -11,6 +12,7 @@ from django.contrib.auth.decorators import login_required , user_passes_test
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.core.files import File
+from django.core.files.base import ContentFile
 from .models import *
 
 
@@ -544,9 +546,29 @@ def privacy_policy(request):
    return render(request, 'pages/privacy-policy.html', context)
 
 def terms_condition(request):
-   legal_terms = Settings.objects.filter(type='legal_terms').first().value_html if Settings.objects.filter(type='legal_terms').exists() else 'Terms and Conditions'
-   
-   context = {
-      'legal_terms': legal_terms
-   }
-   return render(request, 'pages/terms-condition.html', context)
+    legal_terms = Settings.objects.filter(type='legal_terms').first().value_html if Settings.objects.filter(type='legal_terms').exists() else 'Terms and Conditions'
+    
+    context = {
+        'legal_terms': legal_terms
+    }
+    return render(request, 'pages/terms-condition.html', context)
+
+
+@staff_member_required
+@login_required(login_url='/users/signin/')
+def edit_image(request, product_id, img_name):
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == 'POST':
+        base64_image = request.POST.get(img_name)
+        image_data = base64.b64decode(base64_image.split(',')[1])
+        image_file = ContentFile(image_data, name=f'{img_name}.png')
+        setattr(product, img_name, image_file)
+        product.save()
+
+    context = {
+       'image_path': getattr(product, img_name),
+       'product': product,
+       'img_name': img_name
+    }
+    return render(request, 'pages/edit-image.html', context)
