@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.0.2] 2024-03-21
+### Changes
+
+- Improve Product Edits
+- Added Image Cropper 
+- Fixes
+
 ## [1.0.1] 2024-03-21
 ### Changes
 
