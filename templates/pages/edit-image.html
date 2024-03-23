@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+
+<link rel="stylesheet" href="{% static "assets/cropper.css" %}">
+
+{% endblock extrastyle %}
+
+{% block content %}
+
+<section class="max-w-xl mx-auto my-10">
+    <h6 class="text-lg font-bold dark:text-white mb-3">Original Image: </h6>
+    <div class="flex items-end gap-3 mb-5">
+        <div>
+            <img id="image" class="" src="{{ image_path.url }}" alt="">
+        </div>
+        <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="cropButton">Crop</button>
+    </div>   
+    <form id="cropped_image_section" class="hidden" method="post">
+        {% csrf_token %}
+        <h6 class="text-lg font-bold dark:text-white mb-3">Cropped Image: </h6>
+        <input type="hidden" id="cropped_image" name="{{ img_name }}">
+        <img id="cropped_image_preview" src="" alt="">
+        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">Save</button>
+    </form> 
+</section>
+
+{% endblock content %}
+
+{% block extra_js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script>
+    const image = document.getElementById('image');
+    const croppedImage = document.getElementById('cropped_image_preview');
+    const croppedImageValue = document.getElementById('cropped_image');
+    const cropper = new Cropper(image, {
+        aspectRatio: 16 / 9,
+        crop(event) {
+        },
+    });
+
+    const cropButton = document.getElementById('cropButton');
+    const croppedImageSection = document.getElementById('cropped_image_section');
+    cropButton.addEventListener('click', function() {
+        const canvas = cropper.getCroppedCanvas();
+        if (!canvas) {
+            return;
+        }
+
+        croppedImage.classList.remove('hidden');
+        croppedImageSection.classList.remove('hidden');
+        croppedImage.src = canvas.toDataURL();
+        croppedImageValue.value = canvas.toDataURL();
+        
+    });
+</script>
+
+{% endblock extra_js %}

@@ -1456,6 +1456,9 @@ input:checked + .toggle-bg {
 .max-w-xs {
   max-width: 20rem;
 }
+.max-w-3xl {
+  max-width: 48rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2138,9 +2141,6 @@ input:checked + .toggle-bg {
 }
 .pt-52 {
   padding-top: 13rem;
-}
-.pt-56 {
-  padding-top: 14rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
