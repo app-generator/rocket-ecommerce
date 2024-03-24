@@ -1,6 +1,14 @@
 # Change Log
 
-## [1.0.2] 2024-03-21
+## [1.0.3] 2024-03-21
+### Changes
+
+- Improve Product Edits
+  - Images & Props
+- Added [HELP](https://rocket-ecommerce.onrender.com/help/) Page
+- Fixes
+
+## [1.0.2] 2024-03-23
 ### Changes
 
 - Improve Product Edits

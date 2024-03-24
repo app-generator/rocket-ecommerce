@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="{% static "favicon.ico" %}">
 
-    <title>Rocket Django - Styled with Tailwind/Flowbite AppSeed</title>
+    <title>Rocket eCommerce - Styled with Tailwind/Flowbite | AppSeed</title>
     <meta name="description"
         content="Open-Source Django starter styled with Tailwind/Flowbite - Actively supported by AppSeed.">
 
@@ -114,23 +114,27 @@
                             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ request.user.email }}</span>
                           </div>
                           <ul class="py-2" aria-labelledby="user-menu-button">
-                            {% if request.user.is_authenticated %}
-                            <li>
-                              <a href="{% url "load_products" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
-                            </li>
+                        {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <li>
+                                <a href="{% url "load_products" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Products</a>
+                            </li>                            
+                            <li>
                               <a href="{% url "general_settings" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                            </li>
+                            {% else %}
+                            <li>
+                              <a href="{% url "profile" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                             </li>
                             {% endif %}
                             <li>
                               <a href="{% url "signout" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                             </li>
-                            {% else %}
+                        {% else %}
                             <li>
                                 <a href="{% url "signin" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign in</a>
                             </li>
-                            {% endif %}
+                        {% endif %}
                           </ul>
                         </div>
                     </div>
