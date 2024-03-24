@@ -278,7 +278,7 @@ At this point, the product should be LIVE.
 
 ## License
 
-**MIT** (total freedom, you can multiply, sell, resell, and update the code)
+@**[MIT](https://github.com/app-generator/license-mit)**
 
 <br />
 
