@@ -54,9 +54,11 @@ urlpatterns = [
     path('settings/social/', views.social_settings, name="social_settings"),
     path('settings/privacy-policy/', views.privacy_settings, name="privacy_settings"),
     path('settings/terms-condition/', views.terms_settings, name="terms_settings"),
+    path('settings/help/', views.help_settings, name="help_settings"),
 
     # legal
     path('privacy/', views.privacy_policy, name="privacy_policy"),
     path('terms/', views.terms_condition, name="terms_condition"),
+    path('help/', views.help, name="help"),
 
 ]

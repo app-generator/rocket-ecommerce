@@ -36,12 +36,12 @@
                                 <div class="mb-5">
                                     <div class="flex gap-3 mb-3">
                                         {% if field.value %}
-                                        <img class="h-24" src="/media/{{ field.value }}" alt="">
+                                        <img class="h-24 rounded border border-gray-200" src="/media/{{ field.value }}" alt="">
                                         {% endif %}
                                         <div class="flex justify-between flex-col">
                                             <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-900 dark:text-white">{{ field.label }}</label>
                                             {% if field.value %}
-                                            <a class="text-blue-500" href="{% url "edit_image" product_id=product.id img_name=field.name %}">Edit</a>
+                                            <a class="text-sm text-blue-500" href="{% url "edit_image" product_id=product.id img_name=field.name %}">edit</a>
                                             {% endif %}
                                         </div>
                                     </div>

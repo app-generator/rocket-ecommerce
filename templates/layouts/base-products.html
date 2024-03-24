@@ -17,6 +17,7 @@
     <link rel="canonical" href="https://github.com/app-generator/rocket-ecommerce">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{% static 'dist/main.css' %}">
+    {% block extrastyle %}{% endblock extrastyle %}
     <style>
         .swiper-slide{
             width: fit-content;
@@ -26,7 +27,7 @@
         }
         .swiper-button-next, .swiper-button-prev {
             position: absolute;
-            bottom: 5%;
+            bottom: 25px;
             top: auto;
         }
         .swiper-button-next {
@@ -38,24 +39,28 @@
             transform: translateX(-50%);
         }
         .swiper-button-next:after, .swiper-button-prev:after {
-            font-size: 58px;
-            color: rgb(156 163 175);
+            font-size: 25px;
+            color: grey;
         }
         .separator {
             position: absolute;
-            bottom: 5%;
+            bottom: 36px;
             top: auto;
             height: 20px;
             width: 2px;
-            background: rgb(156 163 175);
+            background: grey;
             z-index: 999;
             left: 50%;
         }
         .swiper-button-next:after {
-            content: "\2192";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 600;
+            content: '\f061';
         }
         .swiper-button-prev:after {
-            content: "\2190";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 600;
+            content: "\f060";
         }
         
     </style>
@@ -111,7 +116,7 @@
                           <ul class="py-2" aria-labelledby="user-menu-button">
                             {% if request.user.is_authenticated %}
                             <li>
-                              <a href="{% url "profile" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+                              <a href="{% url "load_products" %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                             </li>
                             {% if request.user.is_superuser %}
                             <li>

@@ -50,3 +50,6 @@ class PrivacyPolicyForm(forms.Form):
 
 class TermsForm(forms.Form):
     legal_terms = QuillFormField()
+
+class HelpForm(forms.Form):
+    legal_help = QuillFormField()
