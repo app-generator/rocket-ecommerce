@@ -20,7 +20,7 @@
         </a>
         &nbsp; &bull; &nbsp;
         <a target="_blank" href="https://appseed.gumroad.com/l/rocket-ecommerce">
-            Buy $49 (optional)
+            Buy $49
         </a>
     </h3>    
     <p>
