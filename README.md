@@ -216,7 +216,7 @@ As a model, feel free to take a look at [build.sh](./build.sh), the file execute
 
 <br />
 
-## **Deploy on [[Render](https://render.com/)**
+## **Deploy on [Render](https://render.com/)**
 
 - Create a Blueprint instance
   - Go to https://dashboard.render.com/blueprints this link.
