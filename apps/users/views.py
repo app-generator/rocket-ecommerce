@@ -46,6 +46,7 @@ class UserPasswrodResetConfirmView(PasswordResetConfirmView):
     form_class = UserSetPasswordForm
 
 
+@login_required(login_url='/users/signin/')
 def signout_view(request):
     logout(request)
     return redirect(reverse('signin'))
@@ -70,6 +71,7 @@ def profile(request):
     return render(request, 'dashboard/profile.html', context)
 
 
+@login_required(login_url='/users/signin/')
 def upload_avatar(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
@@ -79,6 +81,7 @@ def upload_avatar(request):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required(login_url='/users/signin/')
 def change_password(request):
     user = request.user
     if request.method == 'POST':
@@ -90,8 +93,13 @@ def change_password(request):
             messages.error(request, "Password doesn't match!")
     return redirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/users/signin/')
+def delete_account(request):
+    user = User.objects.get(username=request.user.username)
+    user.delete()
+    return redirect(reverse('signin'))
 
-
+@login_required(login_url='/users/signin/')
 def user_list(request):
     filters = user_filter(request)
     user_list = User.objects.filter(**filters)
