@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.5] 2024-03-25
+### Changes
+
+- Update HOMEpage Video
+
 ## [1.0.4] 2024-03-25
 ### Changes
 
