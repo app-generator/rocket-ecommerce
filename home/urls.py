@@ -29,7 +29,7 @@ urlpatterns = [
 
     #Category
     path('category-list/', views.category_page, name='category_list'),
-    path('category-product/<str:name>/', views.category_products, name='category_products'),
+    path('category-product/<str:slug>/', views.category_products, name='category_products'),
 
     #Discount
     path('discounts/', views.discounts, name='discounts'),

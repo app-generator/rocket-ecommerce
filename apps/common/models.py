@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 from django_quill.fields import QuillField
 from autoslug import AutoSlugField
+from django.urls import reverse
 
 # Create your models here.
 
@@ -60,6 +61,9 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('product_details', kwargs={'slug': self.slug})
 
 
 

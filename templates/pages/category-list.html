@@ -2,19 +2,21 @@
 
 {% block content %}
 
-<div class="container mx-auto py-8 mt-10">
-    <div class="flex items-center justify-center mb-5 mt-5">
-        <hr class="border-t border-gray-300 flex-grow mr-4">
-        <h1 class="text-xl font-semibold text-center text-gray-600">Categories</h1>
-        <hr class="border-t border-gray-300 flex-grow ml-4">
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {% for tag in tags %}
-        <a href="{% url 'category_products' tag.name %}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <span class="mr-2">{{ tag.name }}</span>
-            <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">{{ tag.count }}</span>
-        </a>
-        {% endfor %}
+<div class="py-44 border-b">
+    <div class="max-w-screen-2xl mx-auto">
+        <div class="flex items-center justify-center mb-5 mt-5">
+            <hr class="border-t border-gray-300 flex-grow mr-4">
+            <h1 class="text-xl font-semibold text-center text-gray-600">Categories</h1>
+            <hr class="border-t border-gray-300 flex-grow ml-4">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for tag in tags %}
+            <a href="{% url 'category_products' tag.slug %}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <span class="mr-2">{{ tag.name }}</span>
+                <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">{{ tag.count }}</span>
+            </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
