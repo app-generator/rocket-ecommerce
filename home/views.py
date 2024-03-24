@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
 from apps.common.models import ProductStripe, Product, Cart, StripeCredentials, Order , Tag , Color, ProductProps, Settings, TypeChocies
-from home.forms import ProductForm, PrivacyPolicyForm, TermsForm
+from home.forms import ProductForm, PrivacyPolicyForm, TermsForm, HelpForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required , user_passes_test
 from django.core.files.base import ContentFile
@@ -71,7 +71,8 @@ def load_products(request):
   context = {
     'stripe_products': ProductStripe.objects.all(),
     'products': Product.objects.all(),
-    'demo_mode': getattr(settings, 'DEMO_MODE')
+    'demo_mode': getattr(settings, 'DEMO_MODE'),
+    'segment': 'product_list',
   }
   return render(request, "pages/load_products.html", context)
 
@@ -183,13 +184,12 @@ def social_settings(request):
             if attribute == 'csrfmiddlewaretoken':
                 continue
             
-            if value:
-                Settings.objects.update_or_create(
-                    type=TypeChocies[attribute],
-                    defaults={
-                    'value': value
-                    }
-                )
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                'value': value
+                }
+            )
         return redirect(request.META.get('HTTP_REFERER'))
     
     context = {
@@ -212,13 +212,12 @@ def privacy_settings(request):
             if attribute == 'csrfmiddlewaretoken':
                 continue
             
-            if value:
-                Settings.objects.update_or_create(
-                    type=TypeChocies[attribute],
-                    defaults={
-                    'value_html': value
-                    }
-                )
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                'value_html': value
+                }
+            )
         return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
@@ -241,13 +240,12 @@ def terms_settings(request):
             if attribute == 'csrfmiddlewaretoken':
                 continue
             
-            if value:
-                Settings.objects.update_or_create(
-                    type=TypeChocies[attribute],
-                    defaults={
-                    'value_html': value
-                    }
-                )
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                'value_html': value
+                }
+            )
         return redirect(request.META.get('HTTP_REFERER'))
 
     context = {
@@ -256,6 +254,35 @@ def terms_settings(request):
        'segment': 'terms_settings'
     }
     return render(request, 'pages/settings/terms-settings.html', context)
+
+
+@staff_member_required
+def help_settings(request):
+    legal_help = Settings.objects.filter(type='legal_help').first()
+    initial_data = {
+        'legal_help': legal_help.value_html if legal_help else '',
+    }
+    form = HelpForm(initial=initial_data)
+
+    if request.method == 'POST':
+        for attribute, value in request.POST.items():
+            if attribute == 'csrfmiddlewaretoken':
+                continue
+            
+            Settings.objects.update_or_create(
+                type=TypeChocies[attribute],
+                defaults={
+                'value_html': value
+                }
+            )
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+       'form': form,       
+       'parent': 'settings',
+       'segment': 'help_settings'
+    }
+    return render(request, 'pages/settings/help-settings.html', context)
 
 
 
@@ -553,6 +580,13 @@ def terms_condition(request):
     }
     return render(request, 'pages/terms-condition.html', context)
 
+def help(request):
+    legal_help = Settings.objects.filter(type='legal_help').first().value_html if Settings.objects.filter(type='legal_help').exists() else 'Help'
+    
+    context = {
+        'legal_help': legal_help
+    }
+    return render(request, 'pages/help.html', context)
 
 @staff_member_required
 @login_required(login_url='/users/signin/')

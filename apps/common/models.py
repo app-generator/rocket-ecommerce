@@ -124,6 +124,7 @@ class TypeChocies(models.TextChoices):
     social_facebook = 'social_facebook', 'Social facebook'
     legal_privacy = 'legal_privacy', 'Legal privacy'
     legal_terms = 'legal_terms', 'Legal terms'
+    legal_help = 'legal_help', 'Legal help'
     hero_video = 'hero_video', 'Hero video'
 
 class Settings(BaseModel):
