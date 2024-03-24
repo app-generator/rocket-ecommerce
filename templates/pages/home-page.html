@@ -3,6 +3,14 @@
 {% extends "layouts/base-products.html" %}
 {% load static %}
 
+{% block title %}
+    {% if request.path == '/' %}
+        {{ site_name }} - eCommerce Solution | {{ copyright }} 
+    {% else %}
+        {{ products|length }} | {{ copyright }} 
+    {% endif %}
+{% endblock title %}
+
 {% block content %}
 <style>
   /* Add custom styles here if needed */

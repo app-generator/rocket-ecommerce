@@ -1,6 +1,10 @@
 {% extends "layouts/base-products.html" %}
 {% load static %}
 
+{% block title %}
+    {{ product.name }} | {{ copyright }} 
+{% endblock title %}
+
 {% block extrastyle %}
 
 <script src="https://kit.fontawesome.com/ea9bd22eef.js" crossorigin="anonymous"></script>

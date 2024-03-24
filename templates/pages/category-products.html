@@ -1,5 +1,9 @@
 {% extends "layouts/base-products.html" %}
 
+{% block title %}
+    {{ tag.product_set.all|length }} | {{ copyright }} 
+{% endblock title %}
+
 {% block content %}
 
 <section class="bg-white pt-0 {% if not request.path == '/' %} md:pt-44 {% else %} md:pt-10 {% endif %} md:pt-10 mb-10 md:mb-16 pb-10 md:pb-16 border-b border-gray-200">
