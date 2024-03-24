@@ -3,7 +3,7 @@ from apps.common.models import Product
 from django.forms import ClearableFileInput
 from django.utils.html import format_html
 from django_quill.forms import QuillFormField
-
+from django.utils.safestring import mark_safe
 
 class ImageWidget(ClearableFileInput):
     def render(self, name, value, attrs=None, renderer=None):
@@ -24,6 +24,9 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         exclude = ('product_stripe', )
+        labels = {
+            'price': mark_safe('Price (Read Only) - <span>Please edit the value in Stripe</span>'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
