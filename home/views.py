@@ -1,7 +1,7 @@
 import stripe
 import requests
 import base64
-from django.db.models import Count
+from django.db.models import Count, F
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponseForbidden, HttpResponse
 from django.conf import settings
@@ -433,13 +433,14 @@ def payment_cancel(request):
 
 
 def category_page(request):
-   all_products = Product.objects.all()
-   tags = Tag.objects.filter(product__in=all_products).distinct()
+    tags = Tag.objects.filter(product__in=Product.objects.all()).distinct().annotate(
+        product_count=Count('product')
+    ).order_by('-product_count')
 
-   context = {
-      'tags': tags,
-   }
-   return render(request,'pages/category-list.html', context)
+    context = {
+        'tags': tags
+    }
+    return render(request,'pages/category-list.html', context)
 
 
 
