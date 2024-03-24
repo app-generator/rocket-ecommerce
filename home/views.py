@@ -15,7 +15,6 @@ from django.core.files import File
 from django.core.files.base import ContentFile
 from .models import *
 
-
 def get_stripe_secret_key(request):
   demo_mode = getattr(settings, 'DEMO_MODE')
   if not demo_mode:
@@ -34,16 +33,44 @@ def staff_member_required(view_func):
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
-
-
-
-def index(request):
+# Dashboard
+def dashboard(request):
 
   context = {
     'segment': 'dashboard',
   }
   return render(request, "dashboard/index.html", context)
 
+def homepage(request, slug=None):
+  context       = {}
+  filter_string = {}
+
+  if slug:
+      
+    if 'search' == slug:
+      return search_page(request)
+    else:
+      context['tag'] = slug
+
+    tag = Tag.objects.get(slug=slug)
+    filter_string['tags__in'] = [tag.pk]
+  
+  products = Product.objects.filter(**filter_string)
+  context['products'] = products
+  return render(request, 'pages/home-page.html',context)
+
+def search_page(request):
+  context       = {}
+  filter_search = {}
+
+  search = request.GET.get('search')
+  if search:
+    filter_search['name__icontains'] = search
+    context['search'] = search
+  
+  products = Product.objects.filter(**filter_search)
+  context['products'] = products
+  return render(request, 'pages/search-page.html', context)
 
 @staff_member_required
 def load_stripe_products(request):
@@ -93,7 +120,6 @@ def create_related_product(request, stripe_product_id):
         product.img_main.save(f"{stripe_product_id}_image.jpg", ContentFile(response.content))
       
   return redirect(request.META.get('HTTP_REFERER'))
-
 
 @staff_member_required
 def edit_product(request, product_id):
@@ -464,25 +490,6 @@ def discounts(request):
     return render(request, 'pages/discounted-product.html', context)
 
 
-
-def homepage(request, slug=None):
-    filter_string = {}
-    if slug:
-       
-       if 'search' == slug:
-        return search_page(request)
-       
-       tag = Tag.objects.get(slug=slug)
-       filter_string['tags__in'] = [tag.pk]
-    
-    products = Product.objects.filter(**filter_string)
-    context = {
-       'products':products
-    }
-    return render(request, 'pages/home-page.html',context)
-
-
-
 @staff_member_required
 @login_required(login_url='/users/signin/')
 def fetch_stripe_transactions(request):
@@ -517,17 +524,7 @@ def show_order(request):
    return render(request,'pages/order-list.html',context)
 
 
-def search_page(request):
-  filter_search = {}
-  search = request.GET.get('search')
-  if search:
-    filter_search['name__icontains'] = search
-  
-  products = Product.objects.filter(**filter_search)
-  context = {
-    'products': products
-  }
-  return render(request, 'pages/search-page.html', context)
+
 
 
 def create_props(request, product_id):

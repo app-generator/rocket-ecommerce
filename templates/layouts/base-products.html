@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="{% static "favicon.ico" %}">
 
-    <title>{% block title %} {{ site_name }} - eCommerce Solution | {{ copyright }} {% endblock title %}</title>
+    <title>{% block title %} {{ page_title }} - {{ copyright }} {% endblock title %}</title>
     <meta name="description"
         content="Open-Source Django starter styled with Tailwind/Flowbite - Actively supported by AppSeed.">
 
@@ -186,30 +186,32 @@
                     <ul class="text-gray-500 dark:text-gray-400 font-normal">
                         {% for tag in tags|slice:"2" %}
                         <li>
-                            <a href="{% url "home_page" tag.slug %}" class="hover:underline text-sm">{{ tag.name|title }}</a>
+                            <a href="{% url "home_page" tag.slug %}" class="underline text-sm">{{ tag.name|title }}</a>
                         </li>
                         {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Sections</h2>
+                    <ul class="text-gray-500 dark:text-gray-400 font-normal">
+                        <li>
+                            <a href="{% url "discounts" %}" class="underline text-sm">Discounts</a>
+                        </li>
+                        <li>
+                            <a href="{% url "search_page" %}" class="underline text-sm">Search</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
                     <h2 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Links</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-normal">
                         <li>
-                            <a href="{% url "discounts" %}" class="hover:underline text-sm">Discounts</a>
+                            <a href="{% url "terms_condition" %}" class="underline text-sm">Terms</a> 
+                            &amp; 
+                            <a href="{% url "privacy_policy" %}" class="underline text-sm">Privacy</a>
                         </li>
                         <li>
-                            <a href="{% url "search_page" %}" class="hover:underline text-sm">Search</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Legal</h2>
-                    <ul class="text-gray-500 dark:text-gray-400 font-normal">
-                        <li>
-                            <a href="{% url "privacy_policy" %}" class="hover:underline text-sm">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="{% url "terms_condition" %}" class="hover:underline text-sm">Terms &amp; Conditions</a>
+                            <a href="{% url "help" %}" class="underline text-sm">Help</a>    
                         </li>
                     </ul>
                 </div>

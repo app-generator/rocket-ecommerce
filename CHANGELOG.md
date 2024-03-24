@@ -1,6 +1,13 @@
 # Change Log
 
-## [1.0.3] 2024-03-21
+## [1.0.4] 2024-03-25
+### Changes
+
+- Added Sitemap [ generated ]
+- Contextual Page Title 
+- Fixes 
+
+## [1.0.3] 2024-03-24
 ### Changes
 
 - Improve Product Edits

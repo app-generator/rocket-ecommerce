@@ -1,6 +1,10 @@
 {% extends "layouts/base-products.html" %}
 {% load static %}
 
+{% block title %}
+    Search for {{ search|title }} - {{ products|length }} products | {{ copyright }} 
+{% endblock title %}
+
 {% block content %}
 
 <section class="max-w-screen-2xl mx-auto px-5 py-44">

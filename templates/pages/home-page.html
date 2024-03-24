@@ -7,7 +7,7 @@
     {% if request.path == '/' %}
         {{ site_name }} - eCommerce Solution | {{ copyright }} 
     {% else %}
-        {{ products|length }} | {{ copyright }} 
+        {{ tag|title }} - {{ products|length }} products in this category | {{ copyright }} 
     {% endif %}
 {% endblock title %}
 
