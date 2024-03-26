@@ -1,9 +1,9 @@
 <div align="center">
-    <a href="https://github.com/app-generator/rocket-ecommerce">
+    <a href="https://appseed.us/product/rocket-ecommerce/django/">
         <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272178364-cbac6d97-b2dc-4d95-bab6-891f4ee7d84d.png"" width="64" height="64" alt="Rocket Icon">
     </a>
     <h1>
-        <a href="https://github.com/app-generator/rocket-ecommerce">
+        <a href="https://appseed.us/product/rocket-ecommerce/django/">
             Rocket eCommerce
         </a>
     </h1>
@@ -11,12 +11,12 @@
         <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong> &bull; <strong>Lifetime Updates</strong> &bull; <strong>Unlimited Projects</strong>
     </p>  
     <h3>
-        <a target="_blank" href="https://rocket-ecommerce.onrender.com">
-            DEMO
+        <a target="_blank" href="https://github.com/app-generator/rocket-ecommerce">
+            Docs
         </a>
-        &nbsp; &bull; &nbsp;
-        <a target="_blank" href="https://appseed.gumroad.com/l/rocket-ecommerce">
-            Buy $49
+        &nbsp; &bull; &nbsp;        
+        <a target="_blank" href="https://rocket-ecommerce.onrender.com">
+            Demo
         </a>
         &nbsp; &bull; &nbsp;
         <a target="_blank" href="https://appseed.us/support/">
@@ -39,11 +39,7 @@
 
 <br />
 
-## Why [Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) 
-
-> 🛒 **Price: [$49](https://appseed.gumroad.com/l/rocket-ecommerce)**, optional but `highly appreciated`
-
-<br />
+## Why [Rocket eCommerce](https://appseed.us/product/rocket-ecommerce/django/) 
 
 #### 👉 ***Supercharge your eCommerce App instantly, launch faster, make $***
 
@@ -278,9 +274,9 @@ At this point, the product should be LIVE.
 
 ## License
 
-@**[MIT](https://github.com/app-generator/license-mit)**
+[Company License](https://github.com/app-generator/license-company)
 
 <br />
 
 ---
-[Rocket eCommerce](https://github.com/app-generator/rocket-ecommerce) - `Open-Source eCommerce` starter powered by **Django** and `Tailwind/Flowbite`.
+[Rocket eCommerce](https://appseed.us/product/rocket-ecommerce/django/) - `eCommerce Starter` powered by **Django** and `Tailwind/Flowbite`.
