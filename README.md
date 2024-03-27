@@ -10,11 +10,7 @@
     <p>
         <strong>Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Stripe</strong> &bull; <strong>Analytics</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong> &bull; <strong>Lifetime Updates</strong> &bull; <strong>Unlimited Projects</strong>
     </p>  
-    <h3>
-        <a target="_blank" href="https://github.com/app-generator/rocket-ecommerce">
-            Docs
-        </a>
-        &nbsp; &bull; &nbsp;        
+    <h3>     
         <a target="_blank" href="https://rocket-ecommerce.onrender.com">
             Demo
         </a>
