@@ -270,7 +270,7 @@ At this point, the product should be LIVE.
 
 ## License
 
-[Company License](https://github.com/app-generator/license-company)
+[EULA License](https://github.com/app-generator/license-eula)
 
 <br />
 
