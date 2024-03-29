@@ -74,6 +74,7 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 | ✅ | Docker | YES |
 | ✅ | CI/CD | Render |
 | ✅  | Active versioning and [support](https://appseed.us/support/) | [AppSeed](https://appseed.us/) |
+| ✅  | [AWS, DO, Azure Deploy Assistance](https://deploypro.dev/)   | `DeployPRO` |
 
 <br />
 
