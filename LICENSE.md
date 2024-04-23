@@ -18,39 +18,39 @@ Used terms:
 
 <br />
 
-## [Personal License](https://github.com/app-generator/license-personal)
+## Personal License
 
-> Licensing Information - full info [here](https://github.com/app-generator/license-personal)
+> Recomended for hobby and personal projects 
 
 | Item | - |
 | ---------------------------------- | --- |
 | Domains | 1 |
-| Team Size | **3 developer** |
+| Number of End Products | 1 |
+| FIGMA Project | ❌ |
 | [Support](https://appseed.us/support/) & Updates: | **6 months** |
 | --- | --- |
 | Product sale | ✅ |
 | Create single personal website/app | ✅ |
 | Create single website/app for client | ✅ |
 | Remove footer credits | ✅ |
-| SaaS application | ❌ |
 
 <br />
 
-## [StartUp License](https://github.com/app-generator/license-startup)
+## PRO License
 
-> Licensing Information - full info [here](https://github.com/app-generator/license-startup)
+> Recomended for agencies (multiple projects and clients)
 
 | Item | - |
 | ---------------------------------- | --- |
-| Domains | 1 |
-| Team Size | **Up to 9 developers** |
-| [Support](https://appseed.us/support/) & Updates: | **12 months** |
+| Domains | Unlimited |
+| Number of End Products | Unlimited |
+| FIGMA Project | ✅ |
+| [Support](https://appseed.us/support/) & Updates: | **Lifetime** |
 | --- | --- |
 | Product sale | ✅ |
-| Create single personal website/app | ✅ |
-| Create single website/app for client | ✅ |
+| Create Unlimited Personal websites/apps | ✅ |
+| Create Unlimited Websites/Apps for clients | ✅ |
 | Remove footer credits | ✅ |
-| SaaS application | ❌ |
 
 <br />
 

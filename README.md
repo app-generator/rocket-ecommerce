@@ -18,6 +18,10 @@
         <a target="_blank" href="https://appseed.us/support/">
            Support
         </a>
+        &nbsp; &bull; &nbsp;
+        <a target="_blank" href="https://appseed.us/product/rocket-ecommerce/django/#pricing">
+           Purchase License
+        </a>
     </h3>    
     <p>
         <strong>Once authenticated, the ADMIN (superuser) can import the products from Stripe and customize each one locally by adding properties like Images, Tags, Discount, .. etc.</strong>
@@ -36,6 +40,10 @@
 <br />
 
 ## Why [Rocket eCommerce](https://appseed.us/product/rocket-ecommerce/django/) 
+
+> Affordable, actively supported eComemrce solution that requires minimal configuration - **[Buy License](https://appseed.us/product/rocket-ecommerce/django/#pricing)**
+
+<br />
 
 #### 👉 ***Supercharge your eCommerce App instantly, launch faster, make $***
 
