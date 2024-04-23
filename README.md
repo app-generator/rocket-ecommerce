@@ -20,7 +20,7 @@
         </a>
         &nbsp; &bull; &nbsp;
         <a target="_blank" href="https://appseed.us/product/rocket-ecommerce/django/#pricing">
-           Purchase License
+           Buy License
         </a>
     </h3>    
     <p>
