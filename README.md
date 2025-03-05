@@ -1,9 +1,9 @@
 <div align="center">
-    <a href="https://appseed.us/product/rocket-ecommerce/django/">
+    <a href="https://app-generator.dev/product/rocket-ecommerce/django/">
         <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272178364-cbac6d97-b2dc-4d95-bab6-891f4ee7d84d.png"" width="64" height="64" alt="Rocket Icon">
     </a>
     <h1>
-        <a href="https://appseed.us/product/rocket-ecommerce/django/">
+        <a href="https://app-generator.dev/product/rocket-ecommerce/django/">
             Rocket eCommerce
         </a>
     </h1>
@@ -19,7 +19,7 @@
            Support
         </a>
         &nbsp; &bull; &nbsp;
-        <a target="_blank" href="https://appseed.us/product/rocket-ecommerce/django/#pricing">
+        <a target="_blank" href="https://app-generator.dev/product/rocket-ecommerce/django/#pricing">
            Buy License
         </a>
     </h3>    
@@ -39,9 +39,9 @@
 
 <br />
 
-## Why [Rocket eCommerce](https://appseed.us/product/rocket-ecommerce/django/) 
+## Why [Rocket eCommerce](https://app-generator.dev/product/rocket-ecommerce/django/) 
 
-> Affordable, actively supported eComemrce solution that requires minimal configuration - **[Buy License](https://appseed.us/product/rocket-ecommerce/django/#pricing)**
+> Affordable, actively supported eComemrce solution that requires minimal configuration - **[Buy License](https://app-generator.dev/product/rocket-ecommerce/django/#pricing)**
 
 <br />
 
@@ -284,4 +284,4 @@ At this point, the product should be LIVE.
 <br />
 
 ---
-[Rocket eCommerce](https://appseed.us/product/rocket-ecommerce/django/) - `eCommerce Starter` powered by **Django** and `Tailwind/Flowbite`.
+[Rocket eCommerce](https://app-generator.dev/product/rocket-ecommerce/django/) - `eCommerce Starter` powered by **Django** and `Tailwind/Flowbite`.
