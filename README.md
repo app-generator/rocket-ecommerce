@@ -57,8 +57,7 @@
 | ✅ | Transactions Tracking | YES |
 | ✅ | Docker | YES |
 | ✅ | CI/CD | Render |
-| ✅  | Active versioning and [support]() | [AppSeed](https://appseed.us/) |
-| ✅  | [AWS, DO, Azure Deploy Assistance](https://deploypro.dev/)   | `DeployPRO` |
+| ✅  | Active versioning and [support]() | [App-Generator](https://app-generator.dev) |
 
 <br />
 
