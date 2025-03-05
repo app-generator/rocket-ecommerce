@@ -15,10 +15,6 @@
             Demo
         </a>
         &nbsp; &bull; &nbsp;
-        <a target="_blank" href="https://appseed.us/support/">
-           Support
-        </a>
-        &nbsp; &bull; &nbsp;
         <a target="_blank" href="https://app-generator.dev/product/rocket-ecommerce/django/#pricing">
            Buy License
         </a>
