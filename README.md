@@ -15,6 +15,10 @@
             Demo
         </a>
         &nbsp; &bull; &nbsp;
+        <a target="_blank" href="https://app-generator.dev/docs/products/rocket-ecommerce/index.html">
+           Documentation
+        </a>        
+        &nbsp; &bull; &nbsp;
         <a target="_blank" href="https://app-generator.dev/product/rocket-ecommerce/django/#pricing">
            Buy License
         </a>
@@ -37,31 +41,7 @@
 
 ## Why [Rocket eCommerce](https://app-generator.dev/product/rocket-ecommerce/django/) 
 
-> Affordable, actively supported eComemrce solution that requires minimal configuration - **[Buy License](https://app-generator.dev/product/rocket-ecommerce/django/#pricing)**
-
-<br />
-
-#### 👉 ***Supercharge your eCommerce App instantly, launch faster, make $***
-
-Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. 
-**Rocket eCommerce** provides you with the boilerplate code you need to launch, FAST. 
-
-#### 👉 ***Rocket your startup in days, not weeks*** 
-
-The Django boilerplate has all you need to build your SaaS, Analytics tool, or any other type of Web App. From idea to production in 5 minutes.
-
-#### 👉 **48+ hours of headaches**
-
- - 1 hrs to set up the project 
- - 2 hrs integrate tooling
- - 2 hrs to handle Stripe
- - 1 hrs for Docker
- - ∞ hrs overthinking...
- - Free [Support](https://appseed.us/support/) via `Email` & [Discord](https://discord.gg/fZC6hup) 
-
-<br />
-
-## Features 
+> Affordable, actively supported eCommerce solution that requires minimal configuration. 
 
 | Status | Item | info | 
 | --- | --- | --- |
@@ -77,17 +57,17 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 | ✅ | Transactions Tracking | YES |
 | ✅ | Docker | YES |
 | ✅ | CI/CD | Render |
-| ✅  | Active versioning and [support](https://appseed.us/support/) | [AppSeed](https://appseed.us/) |
+| ✅  | Active versioning and [support]() | [AppSeed](https://appseed.us/) |
 | ✅  | [AWS, DO, Azure Deploy Assistance](https://deploypro.dev/)   | `DeployPRO` |
 
 <br />
 
 ## Manual Build 
 
-> 👉 Download code (public access)
+> 👉 Download the sources from the official [product page](https://app-generator.dev/product/rocket-ecommerce/django/) (requires a purchase).
 
 ```bash
-$ git clone https://github.com/app-generator/rocket-ecommerce.git
+$ unzip rocket-ecommerce.zip
 $ cd rocket-ecommerce
 ```
 
@@ -151,10 +131,10 @@ $ python manage.py runserver       # start the project
 
 ## Start With Docker
 
-> 👉 Download code (public access)
+> 👉 Download the sources from the official [product page](https://app-generator.dev/product/rocket-ecommerce/django/) (requires a purchase).
 
 ```bash
-$ git clone https://github.com/app-generator/rocket-ecommerce.git
+$ unzip rocket-ecommerce.zip
 $ cd rocket-ecommerce
 ```
 
@@ -201,7 +181,7 @@ $ python manage.py migrate
 
 ## Production Build
 
-> For issues, contact [support](https://appseed.us/support/) (eMail & Discord)
+> For issues, contact [support](https://app-generator.dev/ticket/create/) (eMail & Discord)
 
 To use the starter in production mode, here are the steps: 
 
