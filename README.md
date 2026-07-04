@@ -1,6 +1,6 @@
 # [Rocket eCommerce](https://app-generator.dev/product/rocket-ecommerce/django/)
 
-A production-ready **eCommerce Content Management System** designed to launch secure digital storefronts without writing backend code. Built using a modern Tailwind CSS and Flowbite interface, this engine offloads infrastructure complexity by utilizing Stripe as a single source of truth for products and pricing, making it ideal for non-technical managers and fast prototyping.
+A production-ready **eCommerce Content Management System** designed to launch secure digital storefronts without writing backend code. Built using a modern `Tailwind CSS and Flowbite` interface, this engine offloads infrastructure complexity by utilizing Stripe as a single source of truth for products and pricing, making it ideal for non-technical managers and fast prototyping.
 
 > Provided by [App-Generator](https://app-generator.dev/) - **Helping entrepreneurs build products with continuous human support**
 
